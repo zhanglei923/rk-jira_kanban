@@ -1,1 +1,1 @@
-# rk-jira_kanban
+# rk-jira-kanban
