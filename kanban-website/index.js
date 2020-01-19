@@ -22,6 +22,8 @@ $(()=>{
 })
 let showIssues = (records)=>{
     let html = `<table>`;
+    records = _.sortBy(records, (o)=>{return o.summary.assignee})
+    console.warn(records)
     for(let i=0;i<records.length;i++){
         let record = records[i];
         let id = record.id;
