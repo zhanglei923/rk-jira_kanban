@@ -26,8 +26,8 @@ let findIssue = (jiraId, succ, fail)=>{
         let summary = {
             status: issue.fields.status.name,
             summary: issue.fields.summary,
-            assignee: issue.fields.assignee.name,
-            reporter: issue.fields.reporter.name,
+            assignee: issue.fields.assignee ? issue.fields.assignee.name : null,
+            reporter: issue.fields.reporter ? issue.fields.reporter.name : null,
             created: issue.fields.created,
             updated: issue.fields.updated,
         };

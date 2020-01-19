@@ -24,6 +24,8 @@ let showIssues = (records)=>{
     let html = `<table>`;
     for(let id in records){
         let record = records[id];
+        console.log(id, record)
+        if(!record) console.warn(id)
         let summary = record.summary;
         // status: issue.fields.status.name,
         // summary: issue.fields.summary,
@@ -31,9 +33,8 @@ let showIssues = (records)=>{
         // reporter: issue.fields.reporter.name,
         // created: issue.fields.created,
         // updated: issue.fields.updated,
-        console.log(record)
 
-        let li = `<tr id="${id}">
+        let li = `<tr id="${id}" class="jira_issue ${summary.status}">
                     <td>${summary.status}</td>
                     <td>${summary.summary}</td>
                     <td>${summary.assignee}</td>
