@@ -19,6 +19,8 @@ let init = ()=>{
         if(!content) return;
         let idList = content.match(/[A-Z]{1,}\-[0-9]{1,}/g)
         console.log(idList)
+        idList.sort();
+        $('#content_idlist').val(idList.join(', '))
 
         $.ajax({
             url: `/action/find-issues`,
