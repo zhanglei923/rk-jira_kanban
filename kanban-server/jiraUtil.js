@@ -30,7 +30,9 @@ let findIssue = (jiraId, succ, fail)=>{
         let summary = {}
         try{
             summary ={
-                status: issue.fields.status.name,
+                statusName: issue.fields.status.name,
+                status: issue.fields.status.statusCategory.name,
+                statusColor: issue.fields.status.statusCategory.colorName,
                 summary: issue.fields.summary,
                 assignee: issue.fields.assignee ? issue.fields.assignee.name : null,
                 reporter: issue.fields.reporter ? issue.fields.reporter.name : null,

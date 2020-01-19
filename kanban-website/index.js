@@ -80,7 +80,7 @@ let showIssues = (records)=>{
         let li = `<tr id="${id}" class="jira_issue issueitem type_${id_prefix} status_${statusname} priority_${summary.priorityId}">
                     <td class="assignee">${summary.assignee?summary.assignee:''}</td>
                     <td class="priorityName">${summary.priorityName?summary.priorityName:''}</td>
-                    <td class="status" align="center">${summary.status}</td>
+                    <td class="status" align="center" title="${summary.statusName}">${summary.status}</td>
                     <td class="id"><a href="${jiraUrl}" target="_blank">${id}</a></td>
                     <td class="summary">${summary.summary}</td>
                     <td class="created" style="display:none;">${momCreated.format('YYYY-MM-DD hh:mm')}</td>

@@ -7,11 +7,18 @@
 .jira_list .status_reassign{
     background-color:#ff0000c7;
 }
+.jira_list .status_todo{
+    background-color:#ff0000c7;
+}
 .jira_list .status_open{
     background-color:#ff0000c7;
 }
 .jira_list .status_reopened{
     background-color:#ff0000a6;
+}
+.jira_list .status_done *{
+    background-color:white !important;
+    color: green;
 }
 .jira_list .status_resolved{
     /* background-color:#37ec376b; */
