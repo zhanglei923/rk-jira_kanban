@@ -18,15 +18,9 @@
 }
 .jira_list .status_done *{
     background-color:white !important;
-    color: green;
-}
-.jira_list .status_resolved{
-    /* background-color:#37ec376b; */
-    color: green;
+    color: green !important;;
 }
 .jira_list .status_resolved *{
-    /* background-color:#37ec376b !important;
-    color:#333 !important; */
     background-color:white !important;
     color: green !important;
 }
