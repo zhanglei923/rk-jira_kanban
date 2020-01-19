@@ -1,0 +1,43 @@
+.jira_list .issueitem{
+    color:#333;
+}
+.jira_list .status_inprogress{
+    background-color:yellow;
+}
+.jira_list .status_reassign{
+    background-color:#ff0000c7;
+}
+.jira_list .status_open{
+    background-color:#ff0000c7;
+}
+.jira_list .status_reopened{
+    background-color:#ff0000a6;
+}
+.jira_list .status_resolved{
+    /* background-color:#37ec376b; */
+    color: green;
+}
+.jira_list .status_resolved *{
+    /* background-color:#37ec376b !important;
+    color:#333 !important; */
+    background-color:white !important;
+    color: green !important;
+}
+.jira_list .status_closed *{
+    background-color:white !important;
+    color:#999 !important;
+}
+.jira_list .priority_1 .priorityName{
+    background-color: black;
+    color: red;
+}
+.jira_list .priority_2 .priorityName{
+    background-color: black;
+    color: red;
+}
+.jira_list .priority_3 .priorityName{
+    background-color: red;
+}
+.jira_list .notexist{
+    color:#bbb;
+}
