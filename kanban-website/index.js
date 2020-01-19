@@ -21,7 +21,7 @@ $(()=>{
     })
 })
 let showIssues = (records)=>{
-    let html = `<table>`;
+    let html = `<table class="jira_report_table" border="1" cellspacing="0">`;
     records = _.sortBy(records, (o)=>{return o.summary.assignee})
     console.warn(records)
     for(let i=0;i<records.length;i++){
@@ -40,15 +40,20 @@ let showIssues = (records)=>{
         // created: issue.fields.created,
         // updated: issue.fields.updated,
         let id_prefix = id.split('-')[0].toLowerCase();
+        let statusname = summary.status.toLowerCase();
 
-        let li = `<tr id="${id}" class="jira_issue type_${id_prefix} ${summary.status}">
-                    <td>${summary.status}</td>
-                    <td>${id}</td>
-                    <td>${summary.summary}</td>
-                    <td>${summary.assignee}</td>
-                    <td>${summary.reporter}</td>
-                    <td>${moment(summary.created).format('YYYY-MM-DD hh:mm')}</td>
-                    <td>${moment(summary.updated).format('YYYY-MM-DD hh:mm')}</td>
+        let momCreated = moment(summary.created);
+        let diffDays = momCreated.diff(new Date(), 'days');
+        
+        let li = `<tr id="${id}" class="jira_issue type_${id_prefix} status_${statusname}">
+                    <td class="assignee">${summary.assignee?summary.assignee:''}</td>
+                    <td class="reporter">${summary.reporter?summary.reporter:''}</td>
+                    <td class="status">${summary.status}</td>
+                    <td class="id">${id}</td>
+                    <td class="summary">${summary.summary}</td>
+                    <td class="created">${momCreated.format('YYYY-MM-DD hh:mm')}</td>
+                    <td class="diff">${diffDays}</td>
+                    <td class="updated" style="display:none;">${moment(summary.updated).format('YYYY-MM-DD hh:mm')}</td>
                 </tr>`
         html += li;
     }

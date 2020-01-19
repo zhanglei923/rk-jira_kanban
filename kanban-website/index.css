@@ -2,14 +2,28 @@
     width:300px;
     height:500px;
 }
+.jira_report_table{
+    border: 1px solid #0000693d;
+}
 .jira_list{
     width: calc(100% - 328px);
-    background-color: mediumaquamarine;
     float: right;
     min-height: 100px;
     max-height: 80%;
 }
-button{
+.jira_list .status_open{
+    background-color:red;
+}
+.jira_list .status_reopened{
+    background-color:red;
+}
+.jira_list .status_closed{
+    background-color:#37ec376b;
+}
+.jira_list .status_resolved{
+    color:#bbb;
+}
+button{    
     background-color: green;
     color:white;
 }
