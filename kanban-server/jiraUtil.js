@@ -1,5 +1,6 @@
 let fs = require('fs')
 let pathutil = require('path')
+let _ = require('lodash')
 var JiraApi = require('jira-client');
 
 let configpath = pathutil.resolve(__dirname, '../.config')
@@ -19,6 +20,7 @@ var jira = new JiraApi(jiraConfig);
 let findIssue = (jiraId, succ, fail)=>{
     if(typeof succ === 'undefined') succ = ()=>{}
     if(typeof fail === 'undefined') fail = ()=>{}
+    jiraId = _.trim(jiraId);
     jira.findIssue(jiraId)
     .then(function(issue) {
         let summary = {

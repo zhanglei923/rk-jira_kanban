@@ -23,20 +23,22 @@ app.use(function (req, res, next) {
 });
 app.use('/website', express.static(webPath));//注意：必须在全局拦截器之后，否则拦截器无法运行
 
+// http://localhost:3006/action/find-issues?id_list=PLATFORM-26965,PLATFORM-27688,DES-12509,xxx
 app.get('/action/find-issues',function(req, res){
     var url = req.url;
     var urlInfo = URL.parse(url, true);
     //console.log(urlInfo)
     var issueIdList = urlInfo.query.id_list;
-
-    console.log(issueIdList)
-    jiraUtil.findIssue(issueIdList, ()=>{
-        
+    issueIdList = _.trim(issueIdList);
+    if(!issueIdList) {
+        res.send({})
+        return;
+    }
+    let idList = issueIdList.split(',');
+    jiraUtil.findIssues(idList, (records)=>{
+        res.send(records)
     })
-
-    res.send({})
 })
-
 
 //启动
 var server = app.listen(3006, function () {
