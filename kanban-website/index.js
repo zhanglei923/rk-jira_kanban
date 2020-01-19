@@ -80,8 +80,8 @@ let showIssues = (records)=>{
                         data-assignee="${summary.assignee?summary.assignee:''}"
                         data-reporter="${summary.reporter?summary.reporter:''}"
                     >
-                    <td class="assignee">${summary.assignee?summary.assignee:''}</td>
-                    <td class="countOfAssigneesBug">${countOfAssigneesBug[assignee]}</td>
+                    <td class="assignee" align="right" style="color:black !important;background-color:white !important;">${summary.assignee?summary.assignee:''}</td>
+                    <td class="countOfAssigneesBug" style="color:black !important;background-color:white !important;">${countOfAssigneesBug[assignee]}</td>
                     <td class="priorityName">${summary.priorityName?summary.priorityName:''}</td>
                     <td class="status" align="center" title="${summary.statusColor} / ${summary.statusName}">${summary.status}</td>
                     <td class="id"><a href="${jiraUrl}" target="_blank">${id}</a></td>
