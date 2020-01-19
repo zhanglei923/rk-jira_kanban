@@ -1,6 +1,13 @@
 .content{
-    width:80%;
+    width:300px;
     height:500px;
+}
+.jira_list{
+    width: calc(100% - 328px);
+    background-color: mediumaquamarine;
+    float: right;
+    min-height: 100px;
+    max-height: 80%;
 }
 button{
     background-color: green;

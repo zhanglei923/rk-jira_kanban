@@ -8,12 +8,17 @@
     <meta http-equiv="expires" content="0">
     <title>jira test</title>
     <link rel="stylesheet" href="./index.css" />
+    <script src="./lib/moment.min.js"></script>
+    <script src="./lib/lodash.min.js"></script>
     <script src="./lib/jquery.min.js"></script>
     <script src="./index.js"></script>
 </head>
 <body>
   <div>
-      <textarea id="content" class="content"></textarea>
+      <div>
+        <textarea id="content" class="content"></textarea>
+        <div id="jira_list" class="jira_list"></div>
+      </div>
       <button id="parseBtn">parse content</button>
   </div>
 </body>
