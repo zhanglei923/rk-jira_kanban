@@ -39,6 +39,9 @@
 .jira_list .priority_3 .priorityName{
     background-color: red;
 }
+.jira_list .priority_4 .priorityName{
+    background-color: white;
+}
 .jira_list .notexist{
     color:#bbb;
 }
