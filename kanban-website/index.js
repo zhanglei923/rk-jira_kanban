@@ -91,5 +91,5 @@ let showIssues = (records)=>{
     }
     html += `</table>`
     console.warn(countOfStatus)
-    $('#jira_list').html(html);
+    $('#jira_list').append(html);
 }
