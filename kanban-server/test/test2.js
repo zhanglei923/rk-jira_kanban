@@ -4,13 +4,11 @@ let jiraUtil = require('../jiraUtil');
 
 let idList = ['PLATFORM-26965', 'PLATFORM-27688', 'DES-12509', 'xxx']
 jiraUtil.findIssues(idList, function(records) {
-  for(let id in records){
-      let record = records[id];
+  records.forEach((record)=>{
       if(record){
-        console.log(id, record.summary.summary)
+        console.log(record.id, record.summary)
       }else{
-        console.log(id, 'not-found')
+        console.log(record.id, 'not-found')
       }
-  }
-  //console.log(record)
+  })
 })

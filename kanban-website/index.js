@@ -22,10 +22,14 @@ $(()=>{
 })
 let showIssues = (records)=>{
     let html = `<table>`;
-    for(let id in records){
-        let record = records[id];
-        console.log(id, record)
-        if(!record) console.warn(id)
+    for(let i=0;i<records.length;i++){
+        let record = records[i];
+        let id = record.id;
+        let notExist = false;
+        if(!record || !record.summary) {
+            notExist = true;
+            console.warn(id)
+        }
         let summary = record.summary;
         // status: issue.fields.status.name,
         // summary: issue.fields.summary,
@@ -33,9 +37,11 @@ let showIssues = (records)=>{
         // reporter: issue.fields.reporter.name,
         // created: issue.fields.created,
         // updated: issue.fields.updated,
+        let id_prefix = id.split('-')[0].toLowerCase();
 
-        let li = `<tr id="${id}" class="jira_issue ${summary.status}">
+        let li = `<tr id="${id}" class="jira_issue type_${id_prefix} ${summary.status}">
                     <td>${summary.status}</td>
+                    <td>${id}</td>
                     <td>${summary.summary}</td>
                     <td>${summary.assignee}</td>
                     <td>${summary.reporter}</td>

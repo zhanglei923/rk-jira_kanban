@@ -23,14 +23,21 @@ let findIssue = (jiraId, succ, fail)=>{
     jiraId = _.trim(jiraId);
     jira.findIssue(jiraId)
     .then(function(issue) {
-        let summary = {
-            status: issue.fields.status.name,
-            summary: issue.fields.summary,
-            assignee: issue.fields.assignee ? issue.fields.assignee.name : null,
-            reporter: issue.fields.reporter ? issue.fields.reporter.name : null,
-            created: issue.fields.created,
-            updated: issue.fields.updated,
-        };
+        //fs.writeFileSync('a.json', JSON.stringify(issue.fields.updated))
+        let summary = {}
+        try{
+            summary ={
+                status: issue.fields.status.name,
+                summary: issue.fields.summary,
+                assignee: issue.fields.assignee ? issue.fields.assignee.name : null,
+                reporter: issue.fields.reporter ? issue.fields.reporter.name : null,
+                created: issue.fields.created,
+                updated: issue.fields.updated
+            };
+        }catch(e){
+            fail(jiraId, e)
+        }
+        //fs.writeFileSync('as.json', JSON.stringify(summary))
         succ(jiraId, summary, issue)
     })
     .catch(function(err) {
@@ -38,21 +45,28 @@ let findIssue = (jiraId, succ, fail)=>{
     });
 }
 let findIssues = (idList, callback)=>{
-    let issueResult = {};
+    let results = [];
     let count = 0;
     let final = ()=>{
-        callback(issueResult)
+        callback(results)
     }
     idList.forEach((id)=>{
         count++;
         findIssue(id, (jiraId, summary, detail)=>{
-            issueResult[jiraId] = {
+            results.push({
+                id: jiraId,
                 summary, 
                 detail
-            };
+            });
+            //console.warn('>>>', jiraId)
             if(--count===0) final()
         }, (jiraId)=>{
-            issueResult[jiraId] = null;
+            //console.warn('??', jiraId)
+            results.push({
+                id: jiraId,
+                summary:{},
+                detail:{}
+            });
             if(--count===0) final()
         })
     });
