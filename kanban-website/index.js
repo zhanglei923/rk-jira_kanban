@@ -89,6 +89,14 @@ let showIssues = (records)=>{
                 </tr>`
         html += li;
     }
+
+    let countsHtml = `<tr><td colspan="99" class="notexist">`
+    for(let key in countOfStatus){
+        countsHtml += `${key}=${countOfStatus[key]}, `
+    }
+    countsHtml += `</td></tr>`
+    html += countsHtml;
+
     html += `</table>`
     console.warn(countOfStatus)
     $('#jira_list').append(html);
