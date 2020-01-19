@@ -15,24 +15,47 @@ let jiraConfig = Object.assign(config, {
   strictSSL: true
 })
 var jira = new JiraApi(jiraConfig);
-module.exports = {
-    findIssue: (jiraId, succ, fail)=>{
-        if(typeof succ === 'undefined') succ = ()=>{}
-        if(typeof fail === 'undefined') fail = ()=>{}
-        jira.findIssue(jiraId)
-        .then(function(issue) {
-            let summary = {
-                status: issue.fields.status.name,
-                summary: issue.fields.summary,
-                assignee: issue.fields.assignee.name,
-                reporter: issue.fields.reporter.name,
-                created: issue.fields.created,
-                updated: issue.fields.updated,
-            };
-            succ(issue, summary)
-        })
-        .catch(function(err) {
-            fail(err);
-        });
+
+let findIssue = (jiraId, succ, fail)=>{
+    if(typeof succ === 'undefined') succ = ()=>{}
+    if(typeof fail === 'undefined') fail = ()=>{}
+    jira.findIssue(jiraId)
+    .then(function(issue) {
+        let summary = {
+            status: issue.fields.status.name,
+            summary: issue.fields.summary,
+            assignee: issue.fields.assignee.name,
+            reporter: issue.fields.reporter.name,
+            created: issue.fields.created,
+            updated: issue.fields.updated,
+        };
+        succ(jiraId, summary, issue)
+    })
+    .catch(function(err) {
+        fail(jiraId, err);
+    });
+}
+let findIssues = (idList, callback)=>{
+    let issueResult = {};
+    let count = 0;
+    let final = ()=>{
+        callback(issueResult)
     }
+    idList.forEach((id)=>{
+        count++;
+        findIssue(id, (jiraId, summary, detail)=>{
+            issueResult[jiraId] = {
+                summary, 
+                detail
+            };
+            if(--count===0) final()
+        }, (jiraId)=>{
+            issueResult[jiraId] = null;
+            if(--count===0) final()
+        })
+    });
+}
+module.exports = {
+    findIssue,
+    findIssues
 }

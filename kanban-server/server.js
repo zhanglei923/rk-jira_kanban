@@ -7,6 +7,8 @@ var bodyParser = require('body-parser')
 var _ = require('lodash')
 var pathutil = require('path');
 
+let jiraUtil = require('./jiraUtil')
+
 let PORT = 3006;
 var httpServer = http.createServer(app);
 
@@ -21,8 +23,16 @@ app.use(function (req, res, next) {
 });
 app.use('/website', express.static(webPath));//注意：必须在全局拦截器之后，否则拦截器无法运行
 
-app.get('/action/projects',function(req, res){
-    let query = req.query;
+app.get('/action/find-issues',function(req, res){
+    var url = req.url;
+    var urlInfo = URL.parse(url, true);
+    //console.log(urlInfo)
+    var issueIdList = urlInfo.query.id_list;
+
+    console.log(issueIdList)
+    jiraUtil.findIssue(issueIdList, ()=>{
+        
+    })
 
     res.send({})
 })
