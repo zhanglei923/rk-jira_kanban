@@ -36,11 +36,14 @@
     background-color:#ff0000ed;
 }
 .jira_list .status_resolved{
-    background-color:#37ec376b;
+    /* background-color:#37ec376b; */
+    color: green;
 }
 .jira_list .status_resolved *{
-    background-color:#37ec376b !important;
-    color:#333 !important;
+    /* background-color:#37ec376b !important;
+    color:#333 !important; */
+    background-color:white !important;
+    color: green !important;
 }
 .jira_list .status_closed *{
     background-color:white !important;
