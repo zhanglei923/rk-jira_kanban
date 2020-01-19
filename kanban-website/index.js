@@ -45,6 +45,7 @@ let showIssues = (records)=>{
     let html = `<table class="jira_report_table" border="1" cellspacing="0">`;
     records = _.sortBy(records, (o)=>{return o.summary.assignee})
     console.warn(records)
+    let countOfAssigneesBug = {}
     let countOfStatus = {};
     for(let i=0;i<records.length;i++){
         let record = records[i];
@@ -68,11 +69,9 @@ let showIssues = (records)=>{
         let id_prefix = id.split('-')[0].toLowerCase();
         let status = summary.status;
         let statusname = status.toLowerCase().replace(/\s/g, '');
-        if(typeof countOfStatus[status] === 'undefined'){
-            countOfStatus[status] = 1;
-        }else{
-            countOfStatus[status]++;
-        }
+        let assignee = summary.assignee?summary.assignee:'';
+        (typeof countOfStatus[status] === 'undefined')?countOfStatus[status] = 1: countOfStatus[status]++;
+        (typeof countOfAssigneesBug[assignee] === 'undefined')?countOfAssigneesBug[assignee] = 1: countOfAssigneesBug[assignee]++;
 
         let momCreated = moment(summary.created);
         let diffDays = momCreated.diff(new Date(), 'days');
@@ -82,6 +81,7 @@ let showIssues = (records)=>{
                         data-reporter="${summary.reporter?summary.reporter:''}"
                     >
                     <td class="assignee">${summary.assignee?summary.assignee:''}</td>
+                    <td class="countOfAssigneesBug">${countOfAssigneesBug[assignee]}</td>
                     <td class="priorityName">${summary.priorityName?summary.priorityName:''}</td>
                     <td class="status" align="center" title="${summary.statusColor} / ${summary.statusName}">${summary.status}</td>
                     <td class="id"><a href="${jiraUrl}" target="_blank">${id}</a></td>
