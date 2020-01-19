@@ -16,6 +16,9 @@
     min-height: 100px;
     max-height: 80%;
 }
+.jira_list .status_reassign{
+    background-color:#ff0000a6;
+}
 .jira_list .status_open{
     background-color:#ff0000a6;
 }
@@ -24,6 +27,9 @@
 }
 .jira_list .status_closed{
     background-color:#37ec376b;
+}
+.jira_list .status_qasign-off{
+    color:#bbb;
 }
 .jira_list .status_resolved{
     color:#bbb;

@@ -53,6 +53,7 @@ let findIssues = (idList, callback)=>{
     let final = ()=>{
         callback(results)
     }
+    idList = _.uniq(idList);
     idList.forEach((id)=>{
         count++;
         findIssue(id, (jiraId, summary, detail)=>{

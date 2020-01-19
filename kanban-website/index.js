@@ -53,7 +53,7 @@ let showIssues = (records)=>{
             console.warn(id)
         }
         if(notExist){
-            html += `<tr><td colspan="99" class="notexist">${id} Not Exist</td></tr>`;
+            html += `<tr><td colspan="99" class="notexist">${id} Not Found</td></tr>`;
             continue;
         }
         let summary = record.summary;
@@ -65,7 +65,7 @@ let showIssues = (records)=>{
         // updated: issue.fields.updated,
         let id_prefix = id.split('-')[0].toLowerCase();
         let status = summary.status;
-        let statusname = status.toLowerCase();
+        let statusname = status.toLowerCase().replace(/\s/g, '');
         if(typeof countOfStatus[status] === 'undefined'){
             countOfStatus[status] = 1;
         }else{
