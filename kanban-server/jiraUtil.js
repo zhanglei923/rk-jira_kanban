@@ -21,7 +21,15 @@ module.exports = {
         if(typeof fail === 'undefined') fail = ()=>{}
         jira.findIssue(jiraId)
         .then(function(issue) {
-            succ(issue)
+            let summary = {
+                status: issue.fields.status.name,
+                summary: issue.fields.summary,
+                assignee: issue.fields.assignee.name,
+                reporter: issue.fields.reporter.name,
+                created: issue.fields.created,
+                updated: issue.fields.updated,
+            };
+            succ(issue, summary)
         })
         .catch(function(err) {
             fail(err);
