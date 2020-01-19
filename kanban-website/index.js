@@ -75,7 +75,7 @@ let showIssues = (records)=>{
         let momCreated = moment(summary.created);
         let diffDays = momCreated.diff(new Date(), 'days');
         let jiraUrl = `http://${jiraConfig.host}/browse/${id}`;
-        let li = `<tr id="${id}" class="jira_issue type_${id_prefix} status_${statusname}">
+        let li = `<tr id="${id}" class="jira_issue issueitem type_${id_prefix} status_${statusname}">
                     <td class="assignee">${summary.assignee?summary.assignee:''}</td>
                     <td class="reporter">${summary.reporter?summary.reporter:''}</td>
                     <td class="status">${summary.status}</td>

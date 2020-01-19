@@ -1,0 +1,5 @@
+{
+  "host": "% your jira host %",
+  "username": "% username %",
+  "password": "% password %"
+}
