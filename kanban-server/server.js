@@ -24,7 +24,7 @@ app.use(function (req, res, next) {
 app.use('/website', express.static(webPath));//注意：必须在全局拦截器之后，否则拦截器无法运行
 
 app.get('/action/jira-info',function(req, res){
-    
+    res.send(jiraUtil.getJiraInfo())
 });
 // http://localhost:3006/action/find-issues?id_list=PLATFORM-26965,PLATFORM-27688,DES-12509,xxx
 app.get('/action/find-issues',function(req, res){

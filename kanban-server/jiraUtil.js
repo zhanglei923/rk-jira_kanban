@@ -17,6 +17,9 @@ let jiraConfig = Object.assign(config, {
 })
 var jira = new JiraApi(jiraConfig);
 
+let getJiraInfo = ()=>{
+    return jiraConfig;
+}
 let findIssue = (jiraId, succ, fail)=>{
     if(typeof succ === 'undefined') succ = ()=>{}
     if(typeof fail === 'undefined') fail = ()=>{}
@@ -73,5 +76,6 @@ let findIssues = (idList, callback)=>{
 }
 module.exports = {
     findIssue,
-    findIssues
+    findIssues,
+    getJiraInfo
 }
