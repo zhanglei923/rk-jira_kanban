@@ -21,7 +21,7 @@
     max-height: 80%;
 }
 .jira_list .issueitem{
-
+    color:#333;
 }
 .jira_list .status_inprogress{
     background-color:yellow;
@@ -30,19 +30,32 @@
     background-color:#ff0000a6;
 }
 .jira_list .status_open{
-    background-color:#ff0000a6;
+    background-color:orange;
 }
 .jira_list .status_reopened{
     background-color:#ff0000ed;
 }
-.jira_list .status_closed{
+.jira_list .status_resolved{
     background-color:#37ec376b;
 }
-.jira_list .status_qasign-off{
-    color:#bbb;
+.jira_list .status_resolved *{
+    background-color:#37ec376b !important;
+    color:#333 !important;
 }
-.jira_list .status_resolved{
-    color:#bbb;
+.jira_list .status_closed *{
+    background-color:white !important;
+    color:#999 !important;
+}
+.jira_list .priority_1 .priorityName{
+    background-color: black;
+    color: red;
+}
+.jira_list .priority_2 .priorityName{
+    background-color: black;
+    color: red;
+}
+.jira_list .priority_3 .priorityName{
+    background-color: red;
 }
 .jira_list .notexist{
     color:#bbb;

@@ -77,14 +77,14 @@ let showIssues = (records)=>{
         let momCreated = moment(summary.created);
         let diffDays = momCreated.diff(new Date(), 'days');
         let jiraUrl = `http://${jiraConfig.host}/browse/${id}`;
-        let li = `<tr id="${id}" class="jira_issue issueitem type_${id_prefix} status_${statusname}">
+        let li = `<tr id="${id}" class="jira_issue issueitem type_${id_prefix} status_${statusname} priority_${summary.priorityId}">
                     <td class="assignee">${summary.assignee?summary.assignee:''}</td>
-                    <td class="reporter">${summary.reporter?summary.reporter:''}</td>
+                    <td class="priorityName">${summary.priorityName?summary.priorityName:''}</td>
                     <td class="status">${summary.status}</td>
                     <td class="id"><a href="${jiraUrl}" target="_blank">${id}</a></td>
                     <td class="summary">${summary.summary}</td>
-                    <td class="created">${momCreated.format('YYYY-MM-DD hh:mm')}</td>
-                    <td class="diff">${diffDays}d</td>
+                    <td class="created" style="display:none;">${momCreated.format('YYYY-MM-DD hh:mm')}</td>
+                    <td class="diff" title="${momCreated.format('YYYY-MM-DD hh:mm')}">${diffDays}d</td>
                     <td class="updated" style="display:none;">${moment(summary.updated).format('YYYY-MM-DD hh:mm')}</td>
                 </tr>`
         html += li;
