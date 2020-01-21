@@ -17,6 +17,9 @@ let jiraConfig = Object.assign(config, {
 })
 var jira = new JiraApi(jiraConfig);
 
+let getJiraInstance = ()=>{
+    return jira;
+}
 let getJiraInfo = ()=>{
     return jiraConfig;
 }
@@ -82,5 +85,6 @@ let findIssues = (idList, callback)=>{
 module.exports = {
     findIssue,
     findIssues,
+    getJiraInstance,
     getJiraInfo
 }
