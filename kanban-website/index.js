@@ -46,6 +46,7 @@ let showIssues = (records)=>{
     records = _.sortBy(records, (o)=>{return o.summary.assignee})
     console.warn(records)
     let countOfAssigneesBug = {}
+    let countOfAssigneesStatus = {};
     let countOfStatus = {};
     for(let i=0;i<records.length;i++){
         let record = records[i];
@@ -72,7 +73,12 @@ let showIssues = (records)=>{
         let assignee = summary.assignee?summary.assignee:'';
         (typeof countOfStatus[status] === 'undefined')?countOfStatus[status] = 1: countOfStatus[status]++;
         (typeof countOfAssigneesBug[assignee] === 'undefined')?countOfAssigneesBug[assignee] = 1: countOfAssigneesBug[assignee]++;
-
+        if(typeof countOfAssigneesStatus[status] === 'undefined') countOfAssigneesStatus[status]={}
+        if(typeof countOfAssigneesStatus[status][assignee] === 'undefined') {
+            countOfAssigneesStatus[status][assignee]=1;
+        }else{
+            countOfAssigneesStatus[status][assignee]++;
+        }
         let momCreated = moment(summary.created);
         let diffDays = momCreated.diff(new Date(), 'days');
         let jiraUrl = `http://${jiraConfig.host}/browse/${id}`;
@@ -93,11 +99,13 @@ let showIssues = (records)=>{
         html += li;
     }
 
-    let countsHtml = `<tr><td colspan="99" class="notexist">`
+    let countsHtml = `<tr><td colspan="99" class="summery">`
     for(let key in countOfStatus){
         countsHtml += `${key}=${countOfStatus[key]}, `
     }
+    countsHtml += '<br>'+JSON.stringify(countOfAssigneesStatus) 
     countsHtml += `</td></tr>`
+    countsHtml += `<tr><td colspan="99" class="notexist">&nbsp;</td></tr>`
     html += countsHtml;
 
     html += `</table>`
