@@ -12,14 +12,31 @@ let initKeyInfo = (callback)=>{
         }
     });
 }
+let getIds = (txt)=>{
+
+}
 let init = ()=>{
     $('#parseBtn').on('click', ()=>{
         let content = $('#content').val();
         content = _.trim(content);
+        let excontent = $('#exclude_content').val();
+        excontent = _.trim(excontent);
         if(!content) return;
         let idList = content.match(/[A-Z]{1,}\-[0-9]{1,}/g)
         console.log(idList)
         idList.sort();
+
+        if(excontent){
+            let exlist = excontent.match(/[A-Z]{1,}\-[0-9]{1,}/g);
+            console.warn('exclude:', exlist)
+            let exmap = {}
+            exlist.forEach((ex)=>{exmap[ex]=true});
+            idList.forEach((id, i)=>{
+                if(exmap[id]) idList[i]=null;
+            })
+            idList = _.compact(idList)
+        }
+
         $('#content_idlist').val(idList.join(', '))
 
         $.ajax({
