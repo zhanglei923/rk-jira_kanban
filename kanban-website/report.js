@@ -1,6 +1,7 @@
 let generateSprintStoryReport = (records)=>{
     let rpt_assignees = {};
     let rpt_types={}
+    let rpt_status={}
     for(let i=0;i<records.length;i++){
         let record = records[i];
         let id = record.id;
@@ -14,14 +15,21 @@ let generateSprintStoryReport = (records)=>{
         if(!rpt_assignees[assignee]) rpt_assignees[assignee] = {
             totalpoints: 0
         }
+        rpt_assignees[assignee].totalpoints += summary.storypoint;
+        //
         if(!rpt_types[issueTypeName]) rpt_types[issueTypeName] = {
             totalpoints: 0
         }
-        rpt_assignees[assignee].totalpoints += summary.storypoint;
         rpt_types[issueTypeName].totalpoints += summary.storypoint;
+        //
+        if(!rpt_status[status]) rpt_status[status] = {
+            totalpoints: 0
+        }
+        rpt_status[status].totalpoints += summary.storypoint;
     }
     showSprintStoryReport(rpt_assignees)
     showSprintStoryReport(rpt_types)
+    showSprintStoryReport(rpt_status)
 }
 let showSprintStoryReport = (rpt_assignees)=>{
     let html = `<div><div>Story Points:</div>`;

@@ -110,7 +110,7 @@ let showIssues = (records)=>{
                     <td class="assignee" align="right" style="color:black !important;background-color:white !important;">${summary.assignee?summary.assignee:''}</td>
                     <td class="countOfAssigneesBug" style="color:black !important;background-color:white !important;">${countOfAssigneesBug[assignee]}</td>
                     <td class="priorityName">${summary.priorityName?summary.priorityName:''}</td>
-                    <td class="">${summary.issueTypeName?summary.issueTypeName:''}</td>
+                    <td class="issueTypeName">${summary.issueTypeName?summary.issueTypeName:''}</td>
                     <td class="status" align="center" title="${summary.statusColor} / ${summary.statusName}">${summary.status}</td>
                     <td class="id"><a href="${jiraUrl}" target="_blank">${id}</a></td>
                     <td class="summary">${summary.summary}</td>

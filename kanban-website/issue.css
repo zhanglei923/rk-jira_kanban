@@ -1,20 +1,23 @@
 .jira_list .issueitem{
-    color:#333;
+    color:red;
 }
-.jira_list .status_inprogress{
+.jira_list .issueTypeName{
+    color:black;
+}
+.jira_list .status_inprogress .status{
     background-color:yellow;
 }
-.jira_list .status_reassign{
+.jira_list .status_reassign .status{
     background-color:#ff0000c7;
 }
-.jira_list .status_todo{
+.jira_list .status_todo .status{
     background-color:#ff5b5bc7;
 }
-.jira_list .status_open{
+.jira_list .status_open .status{
     background-color:#ff0000c7;
 }
-.jira_list .status_reopened{
-    background-color:#ff0000a6;
+.jira_list .status_reopened .status{
+    background-color:#ffcacab8;
 }
 .jira_list .status_done *{
     background-color:white !important;
@@ -29,15 +32,15 @@
     color:#999 !important;
 }
 .jira_list .priority_1 .priorityName{
-    background-color: black;
+    background-color: #ff00005c;
     color: red;
 }
 .jira_list .priority_2 .priorityName{
-    background-color: black;
+    background-color: #ff00005c;
     color: red;
 }
 .jira_list .priority_3 .priorityName{
-    background-color: red;
+    background-color: #ffcacab8;
 }
 .jira_list .priority_4 .priorityName{
     background-color: white;
