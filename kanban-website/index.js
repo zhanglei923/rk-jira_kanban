@@ -48,6 +48,7 @@ let showIssues = (records)=>{
     let countOfAssigneesBug = {}
     let countOfAssigneesStatus = {};
     let countOfStatus = {};
+    let jira_urls = [];
     for(let i=0;i<records.length;i++){
         let record = records[i];
         let id = record.id;
@@ -60,6 +61,7 @@ let showIssues = (records)=>{
             html += `<tr><td colspan="99" class="notexist">${id} Not Found</td></tr>`;
             continue;
         }
+        jira_urls.push(`http://jira.in${'gage'}app.com/browse/${id}`)
         let summary = record.summary;
         // status: issue.fields.status.name,
         // summary: issue.fields.summary,
@@ -111,5 +113,6 @@ let showIssues = (records)=>{
 
     html += `</table>`
     console.warn(countOfStatus)
+    console.warn(jira_urls.join('\n'))
     $('#jira_list').append(html);
 }
