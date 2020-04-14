@@ -9,6 +9,8 @@ let config = fs.readFileSync(configpath, 'utf-8')
 config = JSON.parse(config)
 console.log(config)
 
+const KEY_OF_SPRINTPOINT = 'customfield_10002';
+
 // Initialize
 let jiraConfig = Object.assign(config, {
   protocol: 'http',
@@ -42,7 +44,9 @@ let findIssue = (jiraId, succ, fail)=>{
                 priorityId: issue.fields.priority ? issue.fields.priority.id : null,
                 priorityName: issue.fields.priority ? issue.fields.priority.name : null,
                 created: issue.fields.created,
-                updated: issue.fields.updated
+                updated: issue.fields.updated,
+                issueTypeName: issue.fields.issuetype.name,
+                storypoint: issue.fields[KEY_OF_SPRINTPOINT]
             };
         }catch(e){
             fail(jiraId, e)
