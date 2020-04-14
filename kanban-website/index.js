@@ -72,6 +72,7 @@ let showIssues = (records)=>{
         let notExist = false;
         if(!record || !record.summary || !record.summary.status) {
             notExist = true;
+            records[i].notExist = notExist;
             console.warn(id)
         }
         if(notExist){
@@ -134,4 +135,5 @@ let showIssues = (records)=>{
     console.warn(countOfStatus)
     console.warn(jira_urls.join('\n'))
     $('#jira_list').append(html);
+    generateSprintStoryReport(records);
 }
