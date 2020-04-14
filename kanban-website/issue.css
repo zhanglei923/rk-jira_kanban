@@ -5,13 +5,13 @@
     color:black;
 }
 .jira_list .status_inprogress .status{
-    background-color:yellow;
+    background-color:#ffff0091;
 }
 .jira_list .status_reassign .status{
     background-color:#ff0000c7;
 }
 .jira_list .status_todo .status{
-    background-color:#ff5b5bc7;
+    background-color:#ff5b5b80;
 }
 .jira_list .status_open .status{
     background-color:#ff0000c7;
