@@ -1,4 +1,5 @@
 let generateSprintStoryReport = (records)=>{
+    let totalpoints=0;
     let rpt_assignees = {};
     let rpt_types={}
     let rpt_status={}
@@ -26,15 +27,18 @@ let generateSprintStoryReport = (records)=>{
             totalpoints: 0
         }
         rpt_status[status].totalpoints += summary.storypoint;
+
+        totalpoints += summary.storypoint;
     }
-    showSprintStoryReport(rpt_assignees)
-    showSprintStoryReport(rpt_types)
-    showSprintStoryReport(rpt_status)
+    showSprintStoryReport(totalpoints, rpt_assignees)
+    showSprintStoryReport(totalpoints, rpt_types)
+    showSprintStoryReport(totalpoints, rpt_status)
 }
-let showSprintStoryReport = (rpt_assignees)=>{
+let showSprintStoryReport = (totalpoints, rpt_assignees)=>{
     let html = `<div><div>Story Points:</div>`;
     for(let name in rpt_assignees){
-        html += `<div style="padding-left:20px;">${name}: ${rpt_assignees[name].totalpoints}</div>`
+        let p = rpt_assignees[name].totalpoints;
+        html += `<div style="padding-left:20px;">${name}: ${p} (${((p/totalpoints)*100).toFixed(1)}%)</div>`
     }
     html += `</div>`
     $('#jira_list').append(html);
