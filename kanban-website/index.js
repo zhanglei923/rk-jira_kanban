@@ -107,7 +107,7 @@ let showIssues = (records)=>{
                         data-reporter="${summary.reporter?summary.reporter:''}"
                     >
                     <td class="reporter" align="right" style="color:#ccc !important;background-color:white !important;">${summary.reporter?summary.reporter:''}</td>
-                    <td class="assignee" align="right" style="color:black !important;background-color:white !important;">${summary.assignee?summary.assignee:''}</td>
+                    <td class="assignee" align="right" style="color:black !important;background-color:white !important;">${summary.assignee?summary.assignee_displayName:''}</td>
                     <td class="countOfAssigneesBug" style="color:black !important;background-color:white !important;">${countOfAssigneesBug[assignee]}</td>
                     <td class="priorityName">${summary.priorityName?summary.priorityName:''}</td>
                     <td class="issueTypeName">${summary.issueTypeName?summary.issueTypeName:''}</td>
