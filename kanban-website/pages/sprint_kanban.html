@@ -1,0 +1,32 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <link rel="icon" href="http://10.10.0.115/doc/_lib/images/favicon.ico" type="image/x-icon" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <title>jira test</title>
+    <link rel="stylesheet" href="./index.css" />
+    <link rel="stylesheet" href="./issue.css" />
+    <script src="./lib/moment.min.js"></script>
+    <script src="./lib/lodash.min.js"></script>
+    <script src="./lib/jquery.min.js"></script>
+    <script src="./report.js"></script>
+    <script src="./index.js"></script>
+</head>
+<body>
+  <div>
+      <div style="float:left;">
+        <textarea id="content" class="content" placeholder="在这里粘贴文本"></textarea>
+        <br>
+        <textarea id="exclude_content" class="content" style="height:100px;" placeholder="在这里粘贴文本，不期望显示"></textarea>
+        <br>    
+        <button id="parseBtn">parse content</button>
+        <br>
+        <textarea id="content_idlist" class="content_idlist" placeholder="id列表"></textarea>    
+      </div>
+      <div id="jira_list" class="jira_list"></div>
+  </div>
+</body>
+</html>
