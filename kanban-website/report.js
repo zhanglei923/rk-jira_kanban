@@ -23,19 +23,20 @@ let generateSprintStoryReport = (records)=>{
         rpt_types[issueTypeName].totalpoints += summary.storypoint;
         //
         if(!rpt_status[status]) rpt_status[status] = {totalpoints: 0}
+        rpt_status[status].totalpoints += summary.storypoint;
         //
         if(!rpt_reporter[reporter]) rpt_reporter[reporter] = {totalpoints: 0}
         rpt_reporter[reporter].totalpoints += summary.storypoint;
 
         totalpoints += summary.storypoint;
     }
-    showSprintStoryReport(totalpoints, rpt_assignees)
-    showSprintStoryReport(totalpoints, rpt_types)
-    showSprintStoryReport(totalpoints, rpt_status)
-    showSprintStoryReport(totalpoints, rpt_reporter)
+    showSprintStoryReport('按负责人统计', totalpoints, rpt_assignees)
+    showSprintStoryReport('按故事类型统计', totalpoints, rpt_types)
+    showSprintStoryReport('按状态统计', totalpoints, rpt_status)
+    showSprintStoryReport('按产品经理统计', totalpoints, rpt_reporter)
 }
-let showSprintStoryReport = (totalpoints, rpt_assignees)=>{
-    let html = `<div><div>Story Points:</div>`;
+let showSprintStoryReport = (desc, totalpoints, rpt_assignees)=>{
+    let html = `<div><div>${desc}Story Points:</div>`;
     for(let name in rpt_assignees){
         let p = rpt_assignees[name].totalpoints;
         html += `<div style="padding-left:20px;">${name}: ${p} (${((p/totalpoints)*100).toFixed(1)}%)</div>`
