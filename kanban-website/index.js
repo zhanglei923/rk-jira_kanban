@@ -91,6 +91,7 @@ let showIssues = (records)=>{
         let status = summary.status;
         let statusname = status.toLowerCase().replace(/\s/g, '');
         let assignee = summary.assignee?summary.assignee:'';
+        let assignee_displayName = summary.assignee_displayName;
         (typeof countOfStatus[status] === 'undefined')?countOfStatus[status] = 1: countOfStatus[status]++;
         (typeof countOfAssigneesBug[assignee] === 'undefined')?countOfAssigneesBug[assignee] = 1: countOfAssigneesBug[assignee]++;
         if(typeof countOfAssigneesStatus[status] === 'undefined') countOfAssigneesStatus[status]={}

@@ -12,12 +12,14 @@ let generateSprintStoryReport = (records)=>{
 
         let status = summary.status;
         let reporter = summary.reporter;
+        let reporter_displayName = summary.reporter_displayName;
         let statusname = status.toLowerCase().replace(/\s/g, '');
         let assignee = summary.assignee?summary.assignee:'';
+        let assignee_displayName = summary.assignee_displayName;
         let issueTypeName = summary.issueTypeName?summary.issueTypeName:'';
         //
-        if(!rpt_assignees[assignee]) rpt_assignees[assignee] = { totalpoints: 0}
-        rpt_assignees[assignee].totalpoints += summary.storypoint;
+        if(!rpt_assignees[assignee_displayName]) rpt_assignees[assignee_displayName] = { totalpoints: 0}
+        rpt_assignees[assignee_displayName].totalpoints += summary.storypoint;
         //
         if(!rpt_types[issueTypeName]) rpt_types[issueTypeName] = { totalpoints: 0}
         rpt_types[issueTypeName].totalpoints += summary.storypoint;
@@ -25,8 +27,8 @@ let generateSprintStoryReport = (records)=>{
         if(!rpt_status[status]) rpt_status[status] = {totalpoints: 0}
         rpt_status[status].totalpoints += summary.storypoint;
         //
-        if(!rpt_reporter[reporter]) rpt_reporter[reporter] = {totalpoints: 0}
-        rpt_reporter[reporter].totalpoints += summary.storypoint;
+        if(!rpt_reporter[reporter_displayName]) rpt_reporter[reporter_displayName] = {totalpoints: 0}
+        rpt_reporter[reporter_displayName].totalpoints += summary.storypoint;
 
         totalpoints += summary.storypoint;
     }
