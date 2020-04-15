@@ -56,7 +56,7 @@ let searchJira = (queryString, succ, fail)=>{
         o.issues.forEach((issue, i)=>{
             let summary = getSummary(issue);
             results.push({
-                id: issue.id,
+                id: issue.key,
                 summary,
                 detail: issue
             })

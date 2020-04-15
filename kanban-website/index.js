@@ -148,13 +148,12 @@ let showIssues = (records)=>{
     console.warn(jira_urls.join('\n'))
     $('#jira_list').html(html);
 
-    let countsHtml = `<tr><td colspan="99" class="summery">`
+    let countsHtml = `<div>`
     for(let key in countOfStatus){
         countsHtml += `${key}=${countOfStatus[key]}, `
     }
     countsHtml += '<br>'+JSON.stringify(countOfAssigneesStatus) 
-    countsHtml += `</td></tr>`
-    countsHtml += `<tr><td colspan="99" class="notexist">&nbsp;</td></tr>`
+    countsHtml += `</div>`
     $('#report_list').html(countsHtml);
 
     generateSprintStoryReport(records);

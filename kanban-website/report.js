@@ -44,5 +44,5 @@ let showSprintStoryReport = (desc, totalpoints, rpt_assignees)=>{
         html += `<div style="padding-left:20px;">${name}: ${p} (${((p/totalpoints)*100).toFixed(1)}%)</div>`
     }
     html += `</div>`
-    $('#jira_list').append(html);
+    $('#report_list').append(html);
 }
