@@ -51,11 +51,17 @@ let getSummary = (issue)=>{
     return summary;
 };
 let searchJira = (queryString, succ, fail)=>{
+    let results = [];
     jira.searchJira(queryString).then((o)=>{
         o.issues.forEach((issue, i)=>{
-            o.issues[i].summary = getSummary(issue);
+            let summary = getSummary(issue);
+            results.push({
+                id: issue.id,
+                summary,
+                detail: issue
+            })
         })
-        succ(o);
+        succ(results);
     })
 };
 let findIssue = (jiraId, succ, fail)=>{
