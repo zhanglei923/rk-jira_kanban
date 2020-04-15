@@ -15,10 +15,8 @@
     border: 1px solid #0000693d;
 }
 .jira_list{
-    width: calc(100% - 328px);
+    width: calc(100% - 0px);
     float: right;
-    min-height: 100px;
-    max-height: 80%;
 }
 
 button{    
