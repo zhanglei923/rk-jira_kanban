@@ -16,6 +16,22 @@ let getIds = (txt)=>{
 
 }
 let init = ()=>{
+    $('#queryBtn').on('click', ()=>{
+        let query_string = $('#query_string').val();
+        query_string = _.trim(query_string);
+        $.ajax({
+            url: `/action/jira/search`,
+            cache: false,
+            data: {
+                query_string: encodeURIComponent(query_string)
+            },
+            success: function( response ) {
+              showIssues(response)
+            },
+            error:function(ajaxObj,msg,err){
+            }
+        });
+    });
     $('#parseBtn').on('click', ()=>{
         let content = $('#content').val();
         content = _.trim(content);
@@ -23,6 +39,9 @@ let init = ()=>{
         excontent = _.trim(excontent);
         if(!content) return;
         let idList = content.match(/[A-Z]{1,}\-[0-9]{1,}/g)
+        if(!idList){
+            return;
+        }
         console.log(idList)
         idList.sort();
 
@@ -59,6 +78,7 @@ $(()=>{
     })
 })
 let showIssues = (records)=>{
+    $('.jira_report_table').off().remove();
     let html = `<table class="jira_report_table" border="1" cellspacing="0">`;
     records = _.sortBy(records, (o)=>{return o.summary.assignee})
     console.warn(records)
@@ -123,6 +143,11 @@ let showIssues = (records)=>{
         html += li;
     }
 
+    html += `</table>`
+    console.warn(countOfStatus)
+    console.warn(jira_urls.join('\n'))
+    $('#jira_list').html(html);
+
     let countsHtml = `<tr><td colspan="99" class="summery">`
     for(let key in countOfStatus){
         countsHtml += `${key}=${countOfStatus[key]}, `
@@ -130,11 +155,7 @@ let showIssues = (records)=>{
     countsHtml += '<br>'+JSON.stringify(countOfAssigneesStatus) 
     countsHtml += `</td></tr>`
     countsHtml += `<tr><td colspan="99" class="notexist">&nbsp;</td></tr>`
-    html += countsHtml;
+    $('#report_list').html(countsHtml);
 
-    html += `</table>`
-    console.warn(countOfStatus)
-    console.warn(jira_urls.join('\n'))
-    $('#jira_list').append(html);
     generateSprintStoryReport(records);
 }

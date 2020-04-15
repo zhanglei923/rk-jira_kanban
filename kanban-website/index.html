@@ -16,9 +16,12 @@
     <script src="./index.js"></script>
 </head>
 <body>
+  <textarea id="query_string" class="content" style="height:34px;width:90%;" placeholder="查询语句"></textarea>
+  <button id="queryBtn">query</button>
+  <br>
   <div>
       <div style="float:left;">
-        <textarea id="content" class="content" placeholder="在这里粘贴文本"></textarea>
+        <textarea id="content" class="content" style="height:100px;" placeholder="在这里粘贴文本"></textarea>
         <br>
         <textarea id="exclude_content" class="content" style="height:100px;" placeholder="在这里粘贴文本，不期望显示"></textarea>
         <br>    
@@ -27,6 +30,7 @@
         <textarea id="content_idlist" class="content_idlist" placeholder="id列表"></textarea>    
       </div>
       <div id="jira_list" class="jira_list"></div>
+      <div id="report_list" class="report_list"></div>
   </div>
 </body>
 </html>

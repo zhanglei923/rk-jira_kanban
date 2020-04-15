@@ -26,7 +26,7 @@ app.use('/', express.static(webPath));//注意：必须在全局拦截器之后�
 app.get('/action/jira-info',function(req, res){
     res.send(jiraUtil.getJiraInfo())
 });
-// http://localhost:3006/action/jira/find-issues?id_list=PLATFORM-26965,PLATFORM-27688,DES-12509,xxx
+// http://localhost:3006/action/jira/search?query_string=filter=19917
 app.get('/action/jira/find-issues',function(req, res){
     var url = req.url;
     var urlInfo = URL.parse(url, true);
