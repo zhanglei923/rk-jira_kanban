@@ -26,8 +26,8 @@ app.use('/', express.static(webPath));//注意：必须在全局拦截器之后�
 app.get('/action/jira-info',function(req, res){
     res.send(jiraUtil.getJiraInfo())
 });
-// http://localhost:3006/action/find-issues?id_list=PLATFORM-26965,PLATFORM-27688,DES-12509,xxx
-app.get('/action/find-issues',function(req, res){
+// http://localhost:3006/action/jira/find-issues?id_list=PLATFORM-26965,PLATFORM-27688,DES-12509,xxx
+app.get('/action/jira/find-issues',function(req, res){
     var url = req.url;
     var urlInfo = URL.parse(url, true);
     //console.log(urlInfo)
@@ -39,6 +39,18 @@ app.get('/action/find-issues',function(req, res){
     }
     let idList = issueIdList.split(',');
     jiraUtil.findIssues(idList, (records)=>{
+        res.send(records)
+    })
+})
+
+// http://localhost:3006/action/jira/search?query_string=filter=19917
+app.get('/action/jira/search',function(req, res){
+    var url = req.url;
+    var urlInfo = URL.parse(url, true);
+    //console.log(urlInfo)
+    var query_string = urlInfo.query.query_string;
+    query_string = decodeURIComponent(query_string);
+    jiraUtil.searchJira(query_string, (records)=>{
         res.send(records)
     })
 })

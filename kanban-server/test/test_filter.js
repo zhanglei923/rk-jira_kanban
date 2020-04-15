@@ -4,7 +4,11 @@ let jiraUtil = require('../jiraUtil');
 
 let jira = jiraUtil.getJiraInstance();
 let queryString = `filter=19917  `
-jira.searchJira(queryString).then((o)=>{
+// jira.searchJira(queryString).then((o)=>{
+//     console.log(o)
+//     fs.writeFileSync('result.json', JSON.stringify(o))
+// })
+jiraUtil.searchJira(queryString, (o)=>{
     console.log(o)
     fs.writeFileSync('result.json', JSON.stringify(o))
-})
+});

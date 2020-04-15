@@ -40,7 +40,7 @@ let init = ()=>{
         $('#content_idlist').val(idList.join(', '))
 
         $.ajax({
-            url: `/action/find-issues`,
+            url: `/action/jira/find-issues`,
             cache: false,
             data: {
                 id_list: idList.join(',')
