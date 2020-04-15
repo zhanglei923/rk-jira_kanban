@@ -130,7 +130,7 @@ let showIssues = (records)=>{
                     <td class="reporter" align="right" style="color:#ccc !important;background-color:white !important;">${summary.reporter_displayName?summary.reporter_displayName:''}</td>
                     <td class="assignee" align="right" style="color:black !important;background-color:white !important;">${summary.assignee?summary.assignee_displayName:''}</td>
                     <td class="countOfAssigneesBug" style="color:black !important;background-color:white !important;">${countOfAssigneesBug[assignee]}</td>
-                    <td class="priorityName">${summary.priorityName?summary.priorityName:''}</td>
+                    <td class="priorityName" title="${summary.priorityId}">${summary.priorityName?summary.priorityName:''}</td>
                     <td class="issueTypeName">${summary.issueTypeName?summary.issueTypeName:''}</td>
                     <td class="status" align="center" title="${summary.statusColor} / ${summary.statusName}">${summary.status}</td>
                     <td class="id"><a href="${jiraUrl}" target="_blank">${id}</a></td>
@@ -145,7 +145,7 @@ let showIssues = (records)=>{
 
     html += `</table>`
     console.warn(countOfStatus)
-    console.warn(jira_urls.join('\n'))
+    //console.warn(jira_urls.join('\n'))
     $('#jira_list').html(html);
 
     let countsHtml = `<div>`
@@ -157,4 +157,5 @@ let showIssues = (records)=>{
     $('#report_list').html(countsHtml);
 
     generateSprintStoryReport(records);
+    generateCommitedStretchedReport(records)
 }

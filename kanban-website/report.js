@@ -37,6 +37,29 @@ let generateSprintStoryReport = (records)=>{
     showSprintStoryReport('按状态统计', totalpoints, rpt_status)
     showSprintStoryReport('按产品经理统计', totalpoints, rpt_reporter)
 }
+let generateCommitedStretchedReport = (records)=>{
+    let totalpoints=0;
+    let commited_points = 0;
+    let stretched_points = 0;
+    for(let i=0;i<records.length;i++){
+        let record = records[i];
+        let id = record.id;
+        if(record.notExist) continue;
+        let summary = record.summary;
+       // 
+        if(summary.priorityId < 3){
+            commited_points += summary.storypoint;
+        }else{
+            stretched_points += summary.storypoint;
+        }
+        totalpoints += summary.storypoint;
+    }
+    let rpt = {
+        'commited': {totalpoints: commited_points},
+        'stretched': {totalpoints: stretched_points}
+    }
+    showSprintStoryReport('按xxx统计', totalpoints, rpt)
+}
 let showSprintStoryReport = (desc, totalpoints, rpt_assignees)=>{
     let html = `<div><div>${desc}Story Points:</div>`;
     for(let name in rpt_assignees){
