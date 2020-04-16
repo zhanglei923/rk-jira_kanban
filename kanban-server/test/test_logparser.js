@@ -44,7 +44,7 @@ let _parseCrewLogs = (crew_name)=>{
                     if(idList){
                         idList.sort();
                         idList.forEach((jira_id)=>{
-                            line += ` http://jira.i${'ngageap'}p.com/browse/${jira_id}`;
+                            line = `http://jira.i${'ngageap'}p.com/browse/${jira_id}, ` + line;
                         })
                     }
                 }
