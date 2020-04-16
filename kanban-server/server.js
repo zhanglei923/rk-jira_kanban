@@ -9,7 +9,7 @@ var pathutil = require('path');
 
 let jiraUtil = require('./jiraUtil')
 
-let PORT = 3006;
+let PORT = 3007;
 var httpServer = http.createServer(app);
 
 app.use(bodyParser.json({limit: '100mb'}));
@@ -26,7 +26,7 @@ app.use('/', express.static(webPath));//注意：必须在全局拦截器之后�
 app.get('/action/jira-info',function(req, res){
     res.send(jiraUtil.getJiraInfo())
 });
-// http://localhost:3006/action/jira/search?query_string=filter=19917
+// http://localhost:3007/action/jira/search?query_string=filter=19917
 app.get('/action/jira/find-issues',function(req, res){
     var url = req.url;
     var urlInfo = URL.parse(url, true);
@@ -43,7 +43,7 @@ app.get('/action/jira/find-issues',function(req, res){
     })
 })
 
-// http://localhost:3006/action/jira/search?query_string=filter=19917
+// http://localhost:3007/action/jira/search?query_string=filter=19917
 app.get('/action/jira/search',function(req, res){
     var url = req.url;
     var urlInfo = URL.parse(url, true);
@@ -56,7 +56,7 @@ app.get('/action/jira/search',function(req, res){
 })
 
 //启动
-var server = app.listen(3006, function () {
+var server = app.listen(3007, function () {
     var host = server.address().address;
     var port = server.address().port;
   
