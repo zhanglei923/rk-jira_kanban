@@ -61,10 +61,12 @@ let generateCommitedStretchedReport = (records)=>{
     showSprintStoryReport('按xxx统计', totalpoints, rpt)
 }
 let showSprintStoryReport = (desc, totalpoints, rpt_assignees)=>{
-    let html = `<div><div>${desc}Story Points:</div>`;
+    let html = `<div><div>"${desc}"points，共(<span class="type_number">${totalpoints}</span>):</div>`;
     for(let name in rpt_assignees){
         let p = rpt_assignees[name].totalpoints;
-        html += `<div style="padding-left:20px;">${name}: ${p} (${((p/totalpoints)*100).toFixed(1)}%)</div>`
+        html += `<div style="padding-left:20px;">
+                    <span class="rpt_item_name">${name}</span>: <span class="type_number">${p}</span> (${((p/totalpoints)*100).toFixed(1)}%)
+                </div>`
     }
     html += `</div>`
     $('#report_list').append(html);
