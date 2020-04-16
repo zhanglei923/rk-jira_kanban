@@ -12,6 +12,7 @@ let crew_blocks = logcontent.split(`>>>${crew_name}>>>`);
 
 console.log(crew_blocks.length)
 
+crew_blocks.pop();//去掉最后一项
 let crew_log_lines = [];
 crew_blocks.forEach((content)=>{
     //let arr2 = content.split(/\>{3}[a-zA-Z0-9]{1,}\>{3}/g);
