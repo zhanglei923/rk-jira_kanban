@@ -4,6 +4,7 @@ let _ = require('lodash')
 let jiraUtil = require('../jiraUtil');
 
 let dir = pathutil.parse(__filename).dir;
+let jira_reg = /[A-Z]{1,}\-[0-9]{1,}/g
 
 let logcontent = fs.readFileSync(pathutil.resolve(dir, './log.txt'), 'utf8')
 
@@ -38,6 +39,15 @@ let _parseCrewLogs = (crew_name)=>{
                 isStarted=false;
                 //console.log('Missing2:', line)
             }else if(isStarted){
+                if(line.match(jira_reg)){
+                    let idList = line.match(jira_reg)
+                    if(idList){
+                        idList.sort();
+                        idList.forEach((jira_id)=>{
+                            line += ` http://jira.i${'ngageap'}p.com/browse/${jira_id}`;
+                        })
+                    }
+                }
                 crew_content_lines2.push(line);
             }else{
                 console.log('Missing:', line)
@@ -53,6 +63,7 @@ let _parseCrewLogs = (crew_name)=>{
     crew_log_lines = _.uniq(crew_log_lines)
 
     crew_log_lines.unshift(crew_marker)
+    crew_log_lines.push(crew_marker+'END')
     console.log(crew_log_lines)
     
     fs.writeFileSync(pathutil.resolve(dir, `./log_${crew_name}.txt`), crew_log_lines.join('\n'));
