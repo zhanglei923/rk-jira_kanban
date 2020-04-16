@@ -62,6 +62,21 @@ let _parseCrewLogs = (crew_name)=>{
     crew_log_lines = _.concat(crew_log_lines)
     crew_log_lines = _.uniq(crew_log_lines)
 
+    //将带bug号的记录，提取到前面
+    let jiras = [];
+    let notjiras =  [];
+    let first = crew_log_lines.shift();//人名
+    crew_log_lines.forEach((line)=>{
+        if(line.match(jira_reg)){
+            jiras.push(line);
+        }else{
+            notjiras.push(line);
+        }
+    })
+    crew_log_lines = [first];
+    crew_log_lines = crew_log_lines.concat(jiras).concat(notjiras)
+
+
     crew_log_lines.unshift(crew_marker)
     crew_log_lines.push(crew_marker+'END')
     console.log(crew_log_lines)
