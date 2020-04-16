@@ -12,7 +12,8 @@ let crew_name_list = [
 ];
 
 let _parseCrewLogs = (crew_name)=>{
-    let crew_blocks = logcontent.split(`>>>${crew_name}>>>`);
+    let crew_marker = `>>>${crew_name}>>>`;
+    let crew_blocks = logcontent.split(crew_marker);
     
     console.log(crew_blocks.length)
     
@@ -50,6 +51,8 @@ let _parseCrewLogs = (crew_name)=>{
     })
     crew_log_lines = _.concat(crew_log_lines)
     crew_log_lines = _.uniq(crew_log_lines)
+
+    crew_log_lines.unshift(crew_marker)
     console.log(crew_log_lines)
     
     fs.writeFileSync(pathutil.resolve(dir, `./log_${crew_name}.txt`), crew_log_lines.join('\n'));
