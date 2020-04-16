@@ -150,7 +150,7 @@ let showIssues = (records)=>{
 
     let countsHtml = `<div>`
     for(let key in countOfStatus){
-        countsHtml += `${key}=${countOfStatus[key]}, `
+        countsHtml += `${key}=<span class="type_number">${countOfStatus[key]}</span>, `
     }
     countsHtml += '<br>'+JSON.stringify(countOfAssigneesStatus) 
     countsHtml += `</div>`
