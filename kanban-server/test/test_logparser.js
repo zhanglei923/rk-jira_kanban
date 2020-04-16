@@ -29,7 +29,7 @@ crew_blocks.forEach((content)=>{
         if(line === '>>>'){
             //console.log(line)
             //console.log('Missing1:', line)
-        }else if(line.match(/^\-{1,}$/)){
+        }else if(line.match(/^\-{1,}$/) || line.match(/^\-{3,}/)){
             isStarted=false;
             //console.log('Missing2:', line)
         }else if(isStarted){
