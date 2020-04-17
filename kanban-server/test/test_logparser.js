@@ -73,6 +73,8 @@ let _parseCrewLogs = (crew_name)=>{
             notjiras.push(line);
         }
     })
+    jiras.sort();//.reverse();
+    notjiras.sort();//.reverse();
     crew_log_lines = [first];
     crew_log_lines = crew_log_lines.concat(jiras).concat(notjiras)
 
