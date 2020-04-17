@@ -67,6 +67,7 @@ let _parseCrewLogs = (crew_name)=>{
     let notjiras =  [];
     let first = crew_log_lines.shift();//人名
     crew_log_lines.forEach((line)=>{
+        line = '  '+line;
         if(line.match(jira_reg)){
             jiras.push(line);
         }else{
