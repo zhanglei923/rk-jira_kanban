@@ -15,13 +15,15 @@ var httpServer = http.createServer(app);
 app.use(bodyParser.json({limit: '100mb'}));
 app.use(bodyParser.urlencoded({limit: '100mb', extended: true}));
 
-let webPath = pathutil.resolve(__dirname, '../kanban-website')
+let webPath1 = pathutil.resolve(__dirname, '../kanban-website')
+let webPath2 = pathutil.resolve(__dirname, '../kanban-www')
 //全局拦截器
 app.use(function (req, res, next) {
     res.set('Cache-Control', 'no-cache')
     next();
 });
-app.use('/', express.static(webPath));//注意：必须在全局拦截器之后，否则拦截器无法运行
+app.use('/kanban-website', express.static(webPath1));//注意：必须在全局拦截器之后，否则拦截器无法运行
+app.use('/kanban-www', express.static(webPath2));//注意：必须在全局拦截器之后，否则拦截器无法运行
 
 app.get('/action/jira-info',function(req, res){
     res.send(jiraUtil.getJiraInfo())
