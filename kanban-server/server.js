@@ -22,6 +22,8 @@ app.use(function (req, res, next) {
     res.set('Cache-Control', 'no-cache')
     next();
 });
+// http://localhost:3007/kanban-website/
+// http://localhost:3007/kanban-www/build/index.html
 app.use('/kanban-website', express.static(webPath1));//注意：必须在全局拦截器之后，否则拦截器无法运行
 app.use('/kanban-www', express.static(webPath2));//注意：必须在全局拦截器之后，否则拦截器无法运行
 
