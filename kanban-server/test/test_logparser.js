@@ -77,7 +77,7 @@ let _parseCrewLogs = (crew_name)=>{
     crew_log_lines = crew_log_lines.concat(jiras).concat(notjiras)
 
 
-    crew_log_lines.unshift(crew_marker)
+    crew_log_lines.unshift(crew_marker+'BEGIN')
     crew_log_lines.push(crew_marker+'END')
     console.log(crew_log_lines)
     
