@@ -12,6 +12,15 @@ let jiraUtil = require('./jiraUtil')
 let PORT = 3007;
 var httpServer = http.createServer(app);
 
+var allowCrossDomain = function(req, res, next) {
+    console.log('from:', req.headers.origin  )
+    res.header('Access-Control-Allow-Origin', req.headers.origin);
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    res.header('Access-Control-Allow-Credentials','true');
+    next();
+};
+app.use(allowCrossDomain);
 app.use(bodyParser.json({limit: '100mb'}));
 app.use(bodyParser.urlencoded({limit: '100mb', extended: true}));
 
@@ -57,6 +66,16 @@ app.get('/action/jira/search',function(req, res){
     jiraUtil.searchJira(query_string, (records)=>{
         res.send(records)
     })
+})
+
+// http://localhost:3007/action/jira/test?query_string=filter=19917
+app.get('/action/jira/test',function(req, res){
+    var url = req.url;
+    var urlInfo = URL.parse(url, true);
+    //console.log(urlInfo)
+    var query_string = urlInfo.query.query_string;
+    query_string = decodeURIComponent(query_string);
+    res.send(query_string)
 })
 
 //启动

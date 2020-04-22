@@ -3,6 +3,23 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  const axios = require('axios');
+  axios.get('http://localhost:3007/action/jira/test?query_string=filter=19917')
+  .then(function (response:any) {
+    // handle success
+    console.log(response);
+  })
+  .catch(function (error:Error) {
+    // handle error
+    console.log(error);
+  })
+  .finally(function () {
+    // always executed
+  });
+
+
+
+
   return (
     <div className="App">
       <header className="App-header">
