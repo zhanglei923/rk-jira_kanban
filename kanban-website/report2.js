@@ -63,21 +63,22 @@ let reportCurrentDataInfo_do = (title, records)=>{
         charttitle.push(name);
         let pdata = people[name];
         let notdone = pdata.issue_total - pdata.issue_done;
+        pdata.notdone = notdone;
         chartdata[0].push(pdata.issue_total)
         chartdata[1].push(notdone)
         chartdata[2].push(pdata.issue_done)
         peoplehtml += `<tr>
                             <td align="right"><span class="rpt_item_name">${name}</span></td>
                             <td class="type_number">
-                                <span class="number_total">${pdata.issue_total}</span>=<span class="number_done">${pdata.issue_done}</span>+<span class="number_open">${notdone}</span>
-                                &nbsp;我完成了[${_percentage(pdata.issue_done, pdata.issue_total)}%]
+                                <span class="number_total">${pdata.issue_total}</span>=<span class="number_done">${pdata.issue_done}</span>+<span class="number_open">${pdata.notdone}</span>
+                                &nbsp;我完成了自己任务的[${_percentage(pdata.issue_done, pdata.issue_total)}%]
                                 <div>
                                 我的总数占总数的${_percentage( pdata.issue_total, totalnum)}%
                                 我的完成占总完成的${_percentage( pdata.issue_done, devisdone)}%
-                                我的未完成占总未完成的${_percentage( notdone, devnotdone)}%
+                                我的未完成占总未完成的${_percentage( pdata.notdone, devnotdone)}%
                                 </div><div>
                                 我的完成占总数的${_percentage( pdata.issue_done, totalnum)}%
-                                我的未完成占总数的${_percentage( notdone, totalnum)}%
+                                我的未完成占总数的${_percentage( pdata.notdone, totalnum)}%
                                 </div>
                             </td>
                         </tr>`
