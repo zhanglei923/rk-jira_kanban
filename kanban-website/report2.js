@@ -57,9 +57,9 @@ let reportCurrentDataInfo_do = (title, records)=>{
         charttitle.push(name);
         let pdata = people[name];
         let notdone = pdata.issue_total - pdata.issue_done;
-        chartdata[0].push(pdata.issue_done)
+        chartdata[0].push(pdata.issue_total)
         chartdata[1].push(notdone)
-        chartdata[2].push(pdata.issue_total)
+        chartdata[2].push(pdata.issue_done)
         peoplehtml += `<tr>
                             <td>${name}</td>
                             <td class="type_number">${pdata.issue_done}</td>
