@@ -148,6 +148,7 @@ let showIssues = (records)=>{
         let jiraUrl = `http://${jiraConfig.host}/browse/${id}`;
         if(summary.devIsDone) statusname = 'devisdone'
         count++;
+        let sprintclass = summary.sprintname.replace(/\s/g,'');
         let li = `<tr id="${id}" class="jira_issue issueitem type_${id_prefix} status_${statusname} priority_${summary.priorityId}"
                         data-assignee="${summary.assignee?summary.assignee:''}"
                         data-reporter="${summary.reporter?summary.reporter:''}"
@@ -156,7 +157,7 @@ let showIssues = (records)=>{
                     <td class="reporter" align="right" style="color:#ccc !important;background-color:white !important;">${summary.reporter_displayName?summary.reporter_displayName:''}</td>
                     <td class="assignee" align="right" style="color:black !important;background-color:white !important;">${summary.assignee?summary.assignee_displayName:''}</td>
                     <td class="countOfAssigneesBug" align="right" style="color:black !important;background-color:white !important;">${countOfAssigneesBug[assignee]}</td>
-                    <td class="" title="${summary.sprintid}">${summary.sprintname?summary.sprintname.replace(/\s/g,''):'-'}</td>
+                    <td class="sprinttask ${sprintclass}" title="${summary.sprintid}">${summary.sprintname?sprintclass:'-'}</td>
                     <td class="priorityName" title="${summary.priorityId}">${summary.priorityName?summary.priorityName:''}</td>
                     <td class="issueTypeName">${summary.issueTypeName?summary.issueTypeName:''}</td>
                     <td class="status" align="center" title="">${summary.devIsDone?'开发完成':''}</td>

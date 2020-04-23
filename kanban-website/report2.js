@@ -47,7 +47,7 @@ let reportCurrentDataInfo_do = (title, records)=>{
             people[assignee_displayName].issue_done++;
             devisdone++;
         }
-        console.log(summary)
+        //console.log(summary)
     }
     let devnotdone = totalnum-devisdone;
     let peoplehtml = ``;

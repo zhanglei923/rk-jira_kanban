@@ -66,3 +66,17 @@
     font-weight: bolder;
     color:red;
 }
+
+
+/****/
+.sprinttask{
+    padding:2px;
+    border:1px dotted blue;
+    color: #0000008c;
+}
+.sprinttask.v2007Sprint3{
+    background-color: #00ffd02b;
+}
+.sprinttask.v2007Sprint4{
+    background-color: #0f00ff26;
+}
