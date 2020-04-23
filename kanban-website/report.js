@@ -106,14 +106,17 @@ let showSprintStoryReport = (desc, totalpoints, rpt_assignees)=>{
                     <span style="float:left;">"${desc}"，共(<span class="type_number">${totalpoints}</span>点)</span>
                     
                     ${showchart?`<br>
-                    <span style="float:left;"><b>个数</b><div id="${cid}" class="ct-chart ${cid}" style="height:110px;width:310px;"></div></span>
-                    <span style="float:left;"><b>点数</b><div id="${pid}" class="ct-chart ${pid}" style="height:110px;width:310px;"></div></span>`
+                    <span style="float:left;"><b>个数</b><div id="${cid}" class="ct-chart ${cid}" style="height:110px;"></div></span>
+                    <span style="float:left;"><b>点数</b><div id="${pid}" class="ct-chart ${pid}" style="height:110px;"></div></span>`
                     :``}
                     </td>
                 </tr>`;
     $('#summary_list_body').append(html);
     //chart
     if(showchart){
+        let w = chartarr_p.length * 80;
+        $(`.${pid}`).width(w);
+        $(`.${cid}`).width(w);
         new Chartist.Bar(`.${pid}`, {
             labels:chart_labels,
             series: [
