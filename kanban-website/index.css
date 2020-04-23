@@ -36,3 +36,7 @@ button{
 .type_number{
     color: brown;
 }
+.created_day_chart{
+    width:900px;
+    height:100px;
+}

@@ -101,6 +101,7 @@ let showIssues = (records)=>{
     let html = `<table class="jira_report_table" border="0" cellspacing="0">`;
     records = _.sortBy(records, (o)=>{return o.summary.assignee})
     console.warn(records)
+    let createdDiffDaysFromNow = [];
     let records2 = [];
     let countOfAssigneesBug = {}
     let countOfAssigneesStatus = {};
@@ -145,6 +146,7 @@ let showIssues = (records)=>{
         }
         let momCreated = moment(summary.created);
         let diffDays = momCreated.diff(new Date(), 'days');
+        if(diffDays <= 0)createdDiffDaysFromNow.push(Math.abs(diffDays))
         let jiraUrl = `http://${jiraConfig.host}/browse/${id}`;
         if(summary.devIsDone) statusname = 'devisdone'
         count++;
@@ -187,7 +189,8 @@ let showIssues = (records)=>{
     // countsHtml += '<br>'+JSON.stringify(countOfAssigneesStatus) 
     // countsHtml += `</div>`
     // $('#report_list').html(countsHtml);
-    resetSummaryTable()
+    resetSummaryTable();
+    reportCreatedDays(createdDiffDaysFromNow);
     reportCurrentDataInfo(records2);
     generateSprintStoryReport(records2);
 }
