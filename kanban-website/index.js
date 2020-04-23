@@ -106,6 +106,7 @@ let showIssues = (records)=>{
     let countOfAssigneesStatus = {};
     let countOfStatus = {};
     let jira_urls = [];
+    let count = 0;
     for(let i=0;i<records.length;i++){
         let record = records[i];
         let id = record.id;
@@ -134,7 +135,6 @@ let showIssues = (records)=>{
         let assignee = summary.assignee?summary.assignee:'';
         let assignee_displayName = summary.assignee_displayName;
         if(only_show_teammember && !team_crews[assignee]) continue;
-
         (typeof countOfStatus[status] === 'undefined')?countOfStatus[status] = 1: countOfStatus[status]++;
         (typeof countOfAssigneesBug[assignee] === 'undefined')?countOfAssigneesBug[assignee] = 1: countOfAssigneesBug[assignee]++;
         if(typeof countOfAssigneesStatus[status] === 'undefined') countOfAssigneesStatus[status]={}
@@ -147,18 +147,20 @@ let showIssues = (records)=>{
         let diffDays = momCreated.diff(new Date(), 'days');
         let jiraUrl = `http://${jiraConfig.host}/browse/${id}`;
         if(summary.devIsDone) statusname = 'devisdone'
+        count++;
         let li = `<tr id="${id}" class="jira_issue issueitem type_${id_prefix} status_${statusname} priority_${summary.priorityId}"
                         data-assignee="${summary.assignee?summary.assignee:''}"
                         data-reporter="${summary.reporter?summary.reporter:''}"
                     >
+                    <td align="right" style="color:black;">#${count}</td>
                     <td class="reporter" align="right" style="color:#ccc !important;background-color:white !important;">${summary.reporter_displayName?summary.reporter_displayName:''}</td>
                     <td class="assignee" align="right" style="color:black !important;background-color:white !important;">${summary.assignee?summary.assignee_displayName:''}</td>
-                    <td class="countOfAssigneesBug" style="color:black !important;background-color:white !important;">${countOfAssigneesBug[assignee]}</td>
+                    <td class="countOfAssigneesBug" align="right" style="color:black !important;background-color:white !important;">${countOfAssigneesBug[assignee]}</td>
                     <td class="priorityName" title="${summary.priorityId}">${summary.priorityName?summary.priorityName:''}</td>
                     <td class="issueTypeName">${summary.issueTypeName?summary.issueTypeName:''}</td>
-                    <td class="status" align="center" title="">${summary.statusName}</td>
-                    <td class="status" align="center" title="">${summary.devIsDone}</td>
-                    <td class="status" align="center" title="${summary.statusColor} / ${summary.statusName}">${summary.status}</td>
+                    <td class="status" align="center" title="">${summary.devIsDone?'开发完成':''}</td>
+                    <td class="status" align="right" title="">${summary.statusName}</td>
+                    <td class="status" align="left" title="${summary.statusColor} / ${summary.statusName}">${summary.status}</td>
                     <td class="id"><a href="${jiraUrl}" target="_blank">${id}</a></td>
                     <td class="summary">${summary.summary}</td>
                     <td class="created" style="display:none;">${momCreated.format('YYYY-MM-DD hh:mm')}</td>
