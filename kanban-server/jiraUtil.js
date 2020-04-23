@@ -53,11 +53,11 @@ let getSummary = (issue)=>{
         if(summary.priorityId < 3){
             summary.is_commited = true;
             summary.stretchorcommited = 'commited';
-            summary.stretchorcommited_displayName = '计划内';
+            summary.stretchorcommited_displayName = '计划内(commited)';
         }else{
             summary.is_stretched = true;
             summary.stretchorcommited = 'stretched';
-            summary.stretchorcommited_displayName = '计划外';
+            summary.stretchorcommited_displayName = '计划外(stretched)';
         }
 
         let sprintinfo = issue.fields[KEY_OF_SPRINT_Id];
