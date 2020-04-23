@@ -4,9 +4,9 @@ let resetSummaryTable = ()=>{
             <thead>
                 <tr>
                     <th></th>
-                    <th>Count</th>
+                    <th>个数</th>
                     <th>%</th>
-                    <th>Points</th>
+                    <th>点数</th>
                     <th>%</th>
                 </tr>
             </thead>
@@ -60,11 +60,11 @@ let generateSprintStoryReport = (records)=>{
         totalpoints += summary.storypoint;
     }
     
-    showSprintStoryReport('按【完成】统计', totalpoints, rpt_devcrew1)
-    showSprintStoryReport('按【未完成】统计', totalpoints, rpt_devcrew2)
-    showSprintStoryReport('按dev完成统计', totalpoints, rpt_devisdone)
-    showSprintStoryReport('按上线状态统计', totalpoints, rpt_status)
     showSprintStoryReport('按负责人统计', totalpoints, rpt_assignees)
+    showSprintStoryReport('按负责人【完成】统计', totalpoints, rpt_devcrew1)
+    showSprintStoryReport('按负责人【未完成】统计', totalpoints, rpt_devcrew2)
+    showSprintStoryReport('按团队完成统计', totalpoints, rpt_devisdone)
+    showSprintStoryReport('按上线状态统计', totalpoints, rpt_status)
     showSprintStoryReport('按故事类型统计', totalpoints, rpt_types)
     showSprintStoryReport('按提需求方统计', totalpoints, rpt_reporter)
 }
