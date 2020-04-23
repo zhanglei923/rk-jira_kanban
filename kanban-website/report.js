@@ -62,8 +62,7 @@ let generateSprintStoryReport = (records)=>{
         //
         update(rpt_stretchorcommit, summary.stretchorcommited_displayName, summary)
         //
-        let thiskey = summary.stretchorcommited_displayName +','+ devisdoneTxt
-        update(rpt_stretchorcommit_detail, thiskey, summary)
+        update(rpt_stretchorcommit_detail, devisdoneTxt +','+ summary.stretchorcommited_displayName, summary)
         //
         totalpoints += summary.storypoint;
     }
