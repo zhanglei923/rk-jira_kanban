@@ -14,8 +14,14 @@ let reportCreatedDays = (createdDiffDaysFromNow)=>{
     })
     console.log(valmap)
 
+    let labels = [];
     let chartdata = [];
     for(let i=min;i<max;i++){
+        if(i%2===0){
+            labels.push(i);
+        }else{
+            labels.push('')
+        }
         if(valmap[i+'']){
             chartdata.push(valmap[i+'']);
         }else{
@@ -23,10 +29,11 @@ let reportCreatedDays = (createdDiffDaysFromNow)=>{
         }
     }
     chartdata = chartdata.reverse()
+    labels.reverse()
     console.log(chartdata)
 
     new Chartist.Line('.created_day_chart', {
-        //labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+        labels,
         series: [
             chartdata
             //[12, 9, 7, 8, 5]
