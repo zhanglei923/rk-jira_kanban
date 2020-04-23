@@ -98,7 +98,7 @@ $(()=>{
 let showIssues = (records)=>{
     let only_show_teammember = $('[type="checkbox"][name="checkbox-only_query_teammembers"]').prop('checked');
     $('.jira_report_table').off().remove();
-    let html = `<table class="jira_report_table" border="1" cellspacing="0">`;
+    let html = `<table class="jira_report_table" border="0" cellspacing="0">`;
     records = _.sortBy(records, (o)=>{return o.summary.assignee})
     console.warn(records)
     let records2 = [];

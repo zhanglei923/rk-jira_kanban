@@ -3,9 +3,9 @@
     margin: 0;
     font-size: 12px;
 }
-table, thead tr th, tbody tr td,table tr th, table tr td { 
+/* table, thead tr th, tbody tr td,table tr th, table tr td { 
     border:1px solid #03040447; 
-}
+} */
 .content{
     width:300px;
     height:300px;
@@ -14,8 +14,9 @@ table, thead tr th, tbody tr td,table tr th, table tr td {
     width:300px;
     height:100px;
 }
-.jira_report_table{
-    border: 1px solid #0000693d;
+.jira_report_table td {
+    border-bottom: 1px solid #0000693d;
+    border-left: 1px solid #0000693d;
 }
 .jira_list{
     width: calc(100% - 0px);
