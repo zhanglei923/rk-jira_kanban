@@ -27,6 +27,12 @@
     background-color:white !important;
     color: green !important;
 }
+.jira_list .status_devisdone{
+    color: green !important;
+}
+.jira_list .status_devisdone *{
+    color: green !important;
+}
 .jira_list .status_closed *{
     background-color:white !important;
     color:#999 !important;

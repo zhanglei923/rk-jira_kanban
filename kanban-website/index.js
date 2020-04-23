@@ -109,6 +109,7 @@ let showIssues = (records)=>{
         // updated: issue.fields.updated,
         let id_prefix = id.split('-')[0].toLowerCase();
         let status = summary.status;
+        let statusName = summary.statusName;
         let statusname = status.toLowerCase().replace(/\s/g, '');
         let assignee = summary.assignee?summary.assignee:'';
         let assignee_displayName = summary.assignee_displayName;
@@ -123,6 +124,7 @@ let showIssues = (records)=>{
         let momCreated = moment(summary.created);
         let diffDays = momCreated.diff(new Date(), 'days');
         let jiraUrl = `http://${jiraConfig.host}/browse/${id}`;
+        if(summary.devIsDone) statusname = 'devisdone'
         let li = `<tr id="${id}" class="jira_issue issueitem type_${id_prefix} status_${statusname} priority_${summary.priorityId}"
                         data-assignee="${summary.assignee?summary.assignee:''}"
                         data-reporter="${summary.reporter?summary.reporter:''}"
@@ -132,6 +134,8 @@ let showIssues = (records)=>{
                     <td class="countOfAssigneesBug" style="color:black !important;background-color:white !important;">${countOfAssigneesBug[assignee]}</td>
                     <td class="priorityName" title="${summary.priorityId}">${summary.priorityName?summary.priorityName:''}</td>
                     <td class="issueTypeName">${summary.issueTypeName?summary.issueTypeName:''}</td>
+                    <td class="status" align="center" title="">${summary.statusName}</td>
+                    <td class="status" align="center" title="">${summary.devIsDone}</td>
                     <td class="status" align="center" title="${summary.statusColor} / ${summary.statusName}">${summary.status}</td>
                     <td class="id"><a href="${jiraUrl}" target="_blank">${id}</a></td>
                     <td class="summary">${summary.summary}</td>

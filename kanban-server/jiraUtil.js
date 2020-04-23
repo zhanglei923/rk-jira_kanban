@@ -44,6 +44,10 @@ let getSummary = (issue)=>{
             issueTypeName: issue.fields.issuetype.name,
             storypoint: issue.fields[KEY_OF_SPRINTPOINT]
         };
+        let devIsDone = false;
+        if(summary.statusName.indexOf('Sign-Off')>=0) devIsDone = true;
+        if(summary.status.toLowerCase().replace(/\s/g, '')==='done') devIsDone = true;
+        summary.devIsDone = devIsDone;
     }catch(e){
         //fail(jiraId, e)
         throw e;
