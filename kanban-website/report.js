@@ -25,6 +25,7 @@ let generateSprintStoryReport = (records)=>{
     let rpt_status={};
     let rpt_reporter={};
     let rpt_stretchorcommit={};
+    let rpt_stretchorcommit_detail={};
     let update = (rptdata, key, summary)=>{
         if(!rptdata[key]) rptdata[key] = { totalpoints: 0, count:0}
         rptdata[key].totalpoints += summary.storypoint;
@@ -60,8 +61,10 @@ let generateSprintStoryReport = (records)=>{
         update(rpt_reporter, reporter_displayName, summary)
         //
         update(rpt_stretchorcommit, summary.stretchorcommited_displayName, summary)
-        
-
+        //
+        let thiskey = summary.stretchorcommited_displayName +','+ devisdoneTxt
+        update(rpt_stretchorcommit_detail, thiskey, summary)
+        //
         totalpoints += summary.storypoint;
     }
     
@@ -73,6 +76,8 @@ let generateSprintStoryReport = (records)=>{
     showSprintStoryReport('按故事类型统计', totalpoints, rpt_types)
     showSprintStoryReport('按提需求方统计', totalpoints, rpt_reporter)
     showSprintStoryReport('按提s/c统计', totalpoints, rpt_stretchorcommit)
+    showSprintStoryReport('按提s/c统计2', totalpoints, rpt_stretchorcommit_detail)
+    
     
 }
 let showSprintStoryReport = (desc, totalpoints, rpt_assignees)=>{
