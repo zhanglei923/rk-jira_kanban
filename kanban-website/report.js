@@ -100,6 +100,7 @@ let showSprintStoryReport = (desc, totalpoints, rpt_assignees)=>{
                     <td align="right">${_percentage(c, totalcount)}%</td>
                     <td class="type_number" align="right">${p}点</td>
                     <td align="right">${_percentage(p,totalpoints)}%</td>
+                    <td colspan="999">&nbsp;</td>
                 </tr>`;
     }
     html += `<tr><td colspan="999">

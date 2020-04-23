@@ -96,10 +96,12 @@ $(()=>{
     })
 })
 let showIssues = (records)=>{
+    let only_show_teammember = $('[type="checkbox"][name="checkbox-only_query_teammembers"]').prop('checked');
     $('.jira_report_table').off().remove();
     let html = `<table class="jira_report_table" border="1" cellspacing="0">`;
     records = _.sortBy(records, (o)=>{return o.summary.assignee})
     console.warn(records)
+    let records2 = [];
     let countOfAssigneesBug = {}
     let countOfAssigneesStatus = {};
     let countOfStatus = {};
@@ -131,6 +133,8 @@ let showIssues = (records)=>{
         let statusname = status.toLowerCase().replace(/\s/g, '');
         let assignee = summary.assignee?summary.assignee:'';
         let assignee_displayName = summary.assignee_displayName;
+        if(only_show_teammember && !team_crews[assignee]) continue;
+
         (typeof countOfStatus[status] === 'undefined')?countOfStatus[status] = 1: countOfStatus[status]++;
         (typeof countOfAssigneesBug[assignee] === 'undefined')?countOfAssigneesBug[assignee] = 1: countOfAssigneesBug[assignee]++;
         if(typeof countOfAssigneesStatus[status] === 'undefined') countOfAssigneesStatus[status]={}
@@ -163,6 +167,8 @@ let showIssues = (records)=>{
                     <td class="updated" style="display:none;">${moment(summary.updated).format('YYYY-MM-DD hh:mm')}</td>
                 </tr>`
         html += li;
+
+        records2.push(record);
     }
 
     html += `</table>`
@@ -178,8 +184,8 @@ let showIssues = (records)=>{
     // countsHtml += `</div>`
     // $('#report_list').html(countsHtml);
     resetSummaryTable()
-    reportCurrentDataInfo(records);
-    generateSprintStoryReport(records);
+    reportCurrentDataInfo(records2);
+    generateSprintStoryReport(records2);
 }
 let initFilterCheckboxes = ()=>{
     $('body').on('click','[type="checkbox"][name="checkbox-filters"]', (e)=>{
