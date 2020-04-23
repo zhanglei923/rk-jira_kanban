@@ -54,6 +54,7 @@ let reportCurrentDataInfo_do = (title, records)=>{
     peoplehtml += `<tr><td align="right"><span>合计</span></td>
                         <td colspan="99">
                         <span class="number_total">${totalnum}</span>=<span class="number_done">${devisdone}</span>+<span class="number_open">${devnotdone}</span>
+                        总共完成了${_percentage(devisdone, totalnum)}%
                         </td>
                     </tr>`;
     let chartid = 'chart'+(Math.random()+'').replace(/\./g, '');
