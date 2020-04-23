@@ -102,11 +102,14 @@ let showSprintStoryReport = (desc, totalpoints, rpt_assignees)=>{
     let rid = 'id'+(Math.random()+'').replace(/\./g, '');
     let pid = 'p'+rid;
     let cid = 'c'+rid;
+    let showchart = false;
     let html = `<tr><td colspan="999" style="background-color:#0000ff21;">
                     <span style="float:left;">"${desc}"，共(<span class="type_number">${totalpoints}</span>点)</span>
-                    <br>
-                    <span style="float:left;">完成数：<div id="${cid}" class="ct-chart ${cid}" style="height:110px;width:110px;"></div></span>
-                    <span style="float:left;">点数：<div id="${pid}" class="ct-chart ${pid}" style="height:110px;width:110px;"></div></span>
+                    
+                    ${showchart?`<br>
+                    <span style="float:left;"><b>个数</b><div id="${cid}" class="ct-chart ${cid}" style="height:110px;width:210px;"></div></span>
+                    <span style="float:left;"><b>点数</b><div id="${pid}" class="ct-chart ${pid}" style="height:110px;width:210px;"></div></span>`
+                    :``}
                     </td>
                 </tr>`;
     let totalcount = 0;
@@ -133,16 +136,18 @@ let showSprintStoryReport = (desc, totalpoints, rpt_assignees)=>{
     }
     $('#summary_list_body').append(html);
     //chart
-    new Chartist.Bar(`.${pid}`, {
-        labels:chart_labels,
-        series: [
-            chartarr_p
-        ]
-      });
-    new Chartist.Bar(`.${cid}`, {
-        labels:chart_labels,
-        series: [
-            chartarr_c
-        ]
-    });
+    if(showchart){
+        new Chartist.Bar(`.${pid}`, {
+            labels:chart_labels,
+            series: [
+                chartarr_p
+            ]
+          });
+        new Chartist.Bar(`.${cid}`, {
+            labels:chart_labels,
+            series: [
+                chartarr_c
+            ]
+        });
+    }
 }
