@@ -60,8 +60,8 @@ let generateSprintStoryReport = (records)=>{
         totalpoints += summary.storypoint;
     }
     
-    showSprintStoryReport('按dev人员【完成】统计', totalpoints, rpt_devcrew1)
-    showSprintStoryReport('按dev人员【未完成】统计', totalpoints, rpt_devcrew2)
+    showSprintStoryReport('按【完成】统计', totalpoints, rpt_devcrew1)
+    showSprintStoryReport('按【未完成】统计', totalpoints, rpt_devcrew2)
     showSprintStoryReport('按dev完成统计', totalpoints, rpt_devisdone)
     showSprintStoryReport('按上线状态统计', totalpoints, rpt_status)
     showSprintStoryReport('按负责人统计', totalpoints, rpt_assignees)
@@ -100,9 +100,13 @@ let _percentage = (a, b)=>{
 };
 let showSprintStoryReport = (desc, totalpoints, rpt_assignees)=>{
     let rid = 'id'+(Math.random()+'').replace(/\./g, '');
+    let pid = 'p'+rid;
+    let cid = 'c'+rid;
     let html = `<tr><td colspan="999" style="background-color:#0000ff21;">
-                    "${desc}"，共(<span class="type_number">${totalpoints}</span>点)
-                    <div id="${rid}" class="ct-chart ${rid}" style="height:110px;width:110px;"></div>
+                    <span style="float:left;">"${desc}"，共(<span class="type_number">${totalpoints}</span>点)</span>
+                    <br>
+                    <span style="float:left;">完成数：<div id="${cid}" class="ct-chart ${cid}" style="height:110px;width:110px;"></div></span>
+                    <span style="float:left;">点数：<div id="${pid}" class="ct-chart ${pid}" style="height:110px;width:110px;"></div></span>
                     </td>
                 </tr>`;
     let totalcount = 0;
@@ -129,10 +133,16 @@ let showSprintStoryReport = (desc, totalpoints, rpt_assignees)=>{
     }
     $('#summary_list_body').append(html);
     //chart
-    new Chartist.Bar(`.${rid}`, {
+    new Chartist.Bar(`.${pid}`, {
         labels:chart_labels,
         series: [
             chartarr_p
         ]
       });
+    new Chartist.Bar(`.${cid}`, {
+        labels:chart_labels,
+        series: [
+            chartarr_c
+        ]
+    });
 }
