@@ -1,3 +1,19 @@
+let resetSummaryTable = ()=>{
+    $('#summary_list').html(`
+        <table border="1" style="border: 1px solid gray;"> 
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Count</th>
+                    <th>%</th>
+                    <th>Points</th>
+                    <th>%</th>
+                </tr>
+            </thead>
+            <tbody id="summary_list_body">
+            </tbody>
+        </table>`)
+}
 let generateSprintStoryReport = (records)=>{
     let totalpoints=0;
     let rpt_devisdone = {};
@@ -42,11 +58,11 @@ let generateSprintStoryReport = (records)=>{
 
         totalpoints += summary.storypoint;
     }
+    showSprintStoryReport('按dev完成统计', totalpoints, rpt_devisdone)
     showSprintStoryReport('按负责人统计', totalpoints, rpt_assignees)
     showSprintStoryReport('按故事类型统计', totalpoints, rpt_types)
     showSprintStoryReport('按状态统计', totalpoints, rpt_status)
-    showSprintStoryReport('按产品经理统计', totalpoints, rpt_reporter)
-    showSprintStoryReport('按dev完成统计', totalpoints, rpt_devisdone)
+    showSprintStoryReport('按提需求方统计', totalpoints, rpt_reporter)
 }
 let generateCommitedStretchedReport = (records)=>{
     let totalpoints=0;
@@ -79,7 +95,10 @@ let _percentage = (a, b)=>{
     return ((a/b)*100).toFixed(1)
 };
 let showSprintStoryReport = (desc, totalpoints, rpt_assignees)=>{
-    let html = `<div><div>"${desc}"points，共(<span class="type_number">${totalpoints}</span>):</div>`;
+    let html = `<tr><td colspan="999" style="background-color:#0000ff21;">
+                    "${desc}"，共(<span class="type_number">${totalpoints}</span>)
+                    </td>
+                </tr>`;
     let totalcount = 0;
     for(let name in rpt_assignees){
         totalcount += rpt_assignees[name].count;
@@ -87,10 +106,13 @@ let showSprintStoryReport = (desc, totalpoints, rpt_assignees)=>{
     for(let name in rpt_assignees){
         let p = rpt_assignees[name].totalpoints;
         let c = rpt_assignees[name].count;
-        html += `<div style="padding-left:20px;">
-                    <span class="rpt_item_name">${name}</span>count=${c} (${_percentage(c, totalcount)}%): <span class="type_number">points=${p}</span> (${_percentage(p,totalpoints)}%)
-                </div>`
+        html += `<tr>
+                    <td class="rpt_item_name" align="right">${name}</td>
+                    <td class="type_number" align="right">${c}</td>
+                    <td align="right">${_percentage(c, totalcount)}%</td>
+                    <td class="type_number" align="right">${p}</td>
+                    <td align="right">${_percentage(p,totalpoints)}%</td>
+                </tr>`;
     }
-    html += `</div>`
-    $('#report_list').append(html);
+    $('#summary_list_body').append(html);
 }

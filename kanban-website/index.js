@@ -159,7 +159,7 @@ let showIssues = (records)=>{
     countsHtml += '<br>'+JSON.stringify(countOfAssigneesStatus) 
     countsHtml += `</div>`
     $('#report_list').html(countsHtml);
-
+    resetSummaryTable()
     generateSprintStoryReport(records);
     generateCommitedStretchedReport(records)
 }
