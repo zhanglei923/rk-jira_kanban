@@ -161,5 +161,4 @@ let showIssues = (records)=>{
     $('#report_list').html(countsHtml);
     resetSummaryTable()
     generateSprintStoryReport(records);
-    generateCommitedStretchedReport(records)
 }

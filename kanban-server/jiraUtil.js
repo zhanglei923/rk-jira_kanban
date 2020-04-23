@@ -48,6 +48,16 @@ let getSummary = (issue)=>{
         if(summary.statusName.indexOf('Sign-Off')>=0) devIsDone = true;
         if(summary.status.toLowerCase().replace(/\s/g, '')==='done') devIsDone = true;
         summary.devIsDone = devIsDone;
+
+        if(summary.priorityId < 3){
+            summary.is_commited = true;
+            summary.stretchorcommited = 'commited';
+            summary.stretchorcommited_displayName = '计划内';
+        }else{
+            summary.is_stretched = true;
+            summary.stretchorcommited = 'stretched';
+            summary.stretchorcommited_displayName = '计划外';
+        }
     }catch(e){
         //fail(jiraId, e)
         throw e;

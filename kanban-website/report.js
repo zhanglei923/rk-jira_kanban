@@ -23,6 +23,7 @@ let generateSprintStoryReport = (records)=>{
     let rpt_types={};
     let rpt_status={};
     let rpt_reporter={};
+    let rpt_stretchorcommit={};
     let update = (rptdata, key, summary)=>{
         if(!rptdata[key]) rptdata[key] = { totalpoints: 0, count:0}
         rptdata[key].totalpoints += summary.storypoint;
@@ -56,6 +57,9 @@ let generateSprintStoryReport = (records)=>{
         update(rpt_status, status, summary)
         //
         update(rpt_reporter, reporter_displayName, summary)
+        //
+        update(rpt_stretchorcommit, summary.stretchorcommited_displayName, summary)
+        
 
         totalpoints += summary.storypoint;
     }
@@ -67,33 +71,8 @@ let generateSprintStoryReport = (records)=>{
     showSprintStoryReport('按上线状态统计', totalpoints, rpt_status)
     showSprintStoryReport('按故事类型统计', totalpoints, rpt_types)
     showSprintStoryReport('按提需求方统计', totalpoints, rpt_reporter)
-}
-let generateCommitedStretchedReport = (records)=>{
-    let totalpoints=0;
-    let commited_points = 0;
-    let stretched_points = 0;
-    let commited_count = 0;
-    let stretched_count = 0;
-    for(let i=0;i<records.length;i++){
-        let record = records[i];
-        let id = record.id;
-        if(record.notExist) continue;
-        let summary = record.summary;
-       // 
-        if(summary.priorityId < 3){
-            commited_points += summary.storypoint;
-            commited_count++;
-        }else{
-            stretched_points += summary.storypoint;
-            stretched_count++;
-        }
-        totalpoints += summary.storypoint;
-    }
-    let rpt = {
-        'commited': {totalpoints: commited_points, count: commited_count},
-        'stretched': {totalpoints: stretched_points, count: stretched_count}
-    }
-    showSprintStoryReport('按点数统计', totalpoints, rpt)
+    showSprintStoryReport('按提s/c统计', totalpoints, rpt_stretchorcommit)
+    
 }
 let _percentage = (a, b)=>{
     return ((a/b)*100).toFixed(1)
