@@ -38,5 +38,14 @@ let reportCreatedDays = (createdDiffDaysFromNow)=>{
             chartdata
             //[12, 9, 7, 8, 5]
         ]
+    }, {
+        fullWidth: true,
+        showPoint: false,
+        distributeSeries: true,
+        axisY: {
+            // onlyInteger: true,
+            // offset: 50
+        },
+        //height: '99%'
     });
 }
