@@ -54,3 +54,15 @@
 .jira_list .notexist{
     color:#bbb;
 }
+.number_total{
+    font-weight: bolder;
+    color:black;
+}
+.number_done{
+    font-weight: bolder;
+    color:green;
+}
+.number_open{
+    font-weight: bolder;
+    color:red;
+}
