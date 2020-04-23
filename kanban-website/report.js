@@ -8,6 +8,7 @@ let resetSummaryTable = ()=>{
                     <th>%</th>
                     <th>点数</th>
                     <th>%</th>
+                    <th colspan="999"></th>
                 </tr>
             </thead>
             <tbody id="summary_list_body">
