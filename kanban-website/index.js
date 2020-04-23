@@ -156,7 +156,7 @@ let showIssues = (records)=>{
                     <td class="reporter" align="right" style="color:#ccc !important;background-color:white !important;">${summary.reporter_displayName?summary.reporter_displayName:''}</td>
                     <td class="assignee" align="right" style="color:black !important;background-color:white !important;">${summary.assignee?summary.assignee_displayName:''}</td>
                     <td class="countOfAssigneesBug" align="right" style="color:black !important;background-color:white !important;">${countOfAssigneesBug[assignee]}</td>
-                    <td class="" title="${summary.sprintid}">${summary.sprintname?summary.sprintname:'-'}</td>
+                    <td class="" title="${summary.sprintid}">${summary.sprintname?summary.sprintname.replace(/\s/g,''):'-'}</td>
                     <td class="priorityName" title="${summary.priorityId}">${summary.priorityName?summary.priorityName:''}</td>
                     <td class="issueTypeName">${summary.issueTypeName?summary.issueTypeName:''}</td>
                     <td class="status" align="center" title="">${summary.devIsDone?'开发完成':''}</td>
