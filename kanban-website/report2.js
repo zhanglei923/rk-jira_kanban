@@ -49,9 +49,12 @@ let reportCurrentDataInfo_do = (title, records)=>{
         }
         console.log(summary)
     }
-    let peoplehtml = `<tr>
-                        <td></td>
-                        <td></td>
+    let devnotdone = totalnum-devisdone;
+    let peoplehtml = ``;
+    peoplehtml += `<tr><td align="right"><span>合计</span></td>
+                        <td colspan="99">
+                        <span class="number_total">${totalnum}</span>=<span class="number_done">${devisdone}</span>+<span class="number_open">${devnotdone}</span>
+                        </td>
                     </tr>`;
     let chartid = 'chart'+(Math.random()+'').replace(/\./g, '');
     let charttitle = [];
@@ -67,11 +70,20 @@ let reportCurrentDataInfo_do = (title, records)=>{
                             <td align="right"><span class="rpt_item_name">${name}</span></td>
                             <td class="type_number">
                                 <span class="number_total">${pdata.issue_total}</span>=<span class="number_done">${pdata.issue_done}</span>+<span class="number_open">${notdone}</span>
-                                &nbsp;[${_percentage(pdata.issue_done, pdata.issue_total)}%]
-                                </td>
+                                &nbsp;我完成了[${_percentage(pdata.issue_done, pdata.issue_total)}%]
+                                <div>
+                                我的总数占总数的${_percentage( pdata.issue_total, totalnum)}%
+                                我的完成占总完成的${_percentage( pdata.issue_done, devisdone)}%
+                                我的未完成占总未完成的${_percentage( notdone, devnotdone)}%
+                                </div><div>
+                                我的完成占总数的${_percentage( pdata.issue_done, totalnum)}%
+                                我的未完成占总数的${_percentage( notdone, totalnum)}%
+                                </div>
+                            </td>
                         </tr>`
     }
     peoplehtml += `<tr><td colspan="99"><div class="${chartid}" style="width:600px;"></div></td></tr>`;
+
     let html = `
     <table border="1" style="border: 1px solid gray;"> 
         <thead>
@@ -80,9 +92,7 @@ let reportCurrentDataInfo_do = (title, records)=>{
             </tr>
         </thead>
         <tbody id="currentdata_body">
-            <tr>
-                <td colspan="99">完成+剩余=合计, ${devisdone}+${totalnum-devisdone}=${totalnum}, 完成率=${_percentage(devisdone, totalnum)}%</td>
-            </tr>
+            
             ${peoplehtml}
         </tbody>
     </table>`    
