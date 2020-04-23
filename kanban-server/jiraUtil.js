@@ -10,6 +10,7 @@ config = JSON.parse(config)
 console.log(config)
 
 const KEY_OF_SPRINTPOINT = 'customfield_10002';
+const KEY_OF_SPRINT_Id = 'customfield_10004';
 
 // Initialize
 let jiraConfig = Object.assign(config, {
@@ -57,6 +58,21 @@ let getSummary = (issue)=>{
             summary.is_stretched = true;
             summary.stretchorcommited = 'stretched';
             summary.stretchorcommited_displayName = '计划外';
+        }
+
+        let sprintinfo = issue.fields[KEY_OF_SPRINT_Id];
+        if(sprintinfo){
+            sprintinfo = sprintinfo.join('')
+            sprintinfo = sprintinfo.split(',');
+            let sprintid;
+            sprintinfo.forEach((item)=>{
+                item = _.trim(item);
+                if(item.match(/^name\=/)) sprintid = item.replace(/^name\=/, '');
+            })
+            summary.sprintid = sprintid;
+            summary.sprintname = _.trim(sprintid.replace(/\d{1,}\.\d{1,}\-\d{1,}\.\d{1,}/g, ''));
+        }else{
+            summary.sprintid = false;
         }
     }catch(e){
         //fail(jiraId, e)
