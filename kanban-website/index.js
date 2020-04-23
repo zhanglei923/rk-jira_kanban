@@ -1,4 +1,17 @@
 let jiraConfig = {};
+let _percentage = (a, b)=>{
+    let num = ((a/b)*100).toFixed(1)
+    if(num*1===100) num=100;
+    if(num*1===0) num=0;
+    return num;
+};
+let team_crews = {
+    [`ch${'engz'}he`]:{scrumTeam:'fe_global'},
+    [`l${'iuh'}d`]:{scrumTeam:'flow'},
+    [`s${'unx'}f`]:{scrumTeam:'fe_global'},
+    [`w${'enh'}y`]:{scrumTeam:'flow'},
+    [`zh${'angl'}ei`]:{scrumTeam:'fe_global'},
+};
 let initKeyInfo = (callback)=>{
     $.ajax({
         url: `/action/jira-info`,
@@ -157,14 +170,15 @@ let showIssues = (records)=>{
     //console.warn(jira_urls.join('\n'))
     $('#jira_list').html(html);
 
-    let countsHtml = `<div>`
-    for(let key in countOfStatus){
-        countsHtml += `${key}=<span class="type_number">${countOfStatus[key]}</span>, `
-    }
-    countsHtml += '<br>'+JSON.stringify(countOfAssigneesStatus) 
-    countsHtml += `</div>`
-    $('#report_list').html(countsHtml);
+    // let countsHtml = `<div>`
+    // for(let key in countOfStatus){
+    //     countsHtml += `${key}=<span class="type_number">${countOfStatus[key]}</span>, `
+    // }
+    // countsHtml += '<br>'+JSON.stringify(countOfAssigneesStatus) 
+    // countsHtml += `</div>`
+    // $('#report_list').html(countsHtml);
     resetSummaryTable()
+    reportCurrentDataInfo(records);
     generateSprintStoryReport(records);
 }
 let initFilterCheckboxes = ()=>{

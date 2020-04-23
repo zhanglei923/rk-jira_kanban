@@ -74,9 +74,6 @@ let generateSprintStoryReport = (records)=>{
     showSprintStoryReport('按提s/c统计', totalpoints, rpt_stretchorcommit)
     
 }
-let _percentage = (a, b)=>{
-    return ((a/b)*100).toFixed(1)
-};
 let showSprintStoryReport = (desc, totalpoints, rpt_assignees)=>{
     let rid = 'id'+(Math.random()+'').replace(/\./g, '');
     let pid = 'p'+rid;
