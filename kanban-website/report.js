@@ -79,15 +79,7 @@ let showSprintStoryReport = (desc, totalpoints, rpt_assignees)=>{
     let pid = 'p'+rid;
     let cid = 'c'+rid;
     let showchart = true;
-    let html = `<tr><td colspan="999" style="background-color:#0000ff21;">
-                    <span style="float:left;">"${desc}"，共(<span class="type_number">${totalpoints}</span>点)</span>
-                    
-                    ${showchart?`<br>
-                    <span style="float:left;"><b>个数</b><div id="${cid}" class="ct-chart ${cid}" style="height:110px;width:310px;"></div></span>
-                    <span style="float:left;"><b>点数</b><div id="${pid}" class="ct-chart ${pid}" style="height:110px;width:310px;"></div></span>`
-                    :``}
-                    </td>
-                </tr>`;
+    let html = `<tr><td colspan="999" style="background-color:#0000ff21;">${desc}</td></tr>`;
     let totalcount = 0;
     for(let name in rpt_assignees){
         totalcount += rpt_assignees[name].count;
@@ -110,6 +102,15 @@ let showSprintStoryReport = (desc, totalpoints, rpt_assignees)=>{
                     <td align="right">${_percentage(p,totalpoints)}%</td>
                 </tr>`;
     }
+    html += `<tr><td colspan="999">
+                    <span style="float:left;">"${desc}"，共(<span class="type_number">${totalpoints}</span>点)</span>
+                    
+                    ${showchart?`<br>
+                    <span style="float:left;"><b>个数</b><div id="${cid}" class="ct-chart ${cid}" style="height:110px;width:310px;"></div></span>
+                    <span style="float:left;"><b>点数</b><div id="${pid}" class="ct-chart ${pid}" style="height:110px;width:310px;"></div></span>`
+                    :``}
+                    </td>
+                </tr>`;
     $('#summary_list_body').append(html);
     //chart
     if(showchart){
