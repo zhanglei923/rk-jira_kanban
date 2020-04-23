@@ -13,7 +13,7 @@ let PORT = 3007;
 var httpServer = http.createServer(app);
 
 var allowCrossDomain = function(req, res, next) {
-    console.log('from:', req.headers.origin  )
+    //console.log('from:', req.headers.origin  )
     res.header('Access-Control-Allow-Origin', req.headers.origin);
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
     res.header('Access-Control-Allow-Headers', 'Content-Type');
@@ -24,8 +24,7 @@ app.use(allowCrossDomain);
 app.use(bodyParser.json({limit: '100mb'}));
 app.use(bodyParser.urlencoded({limit: '100mb', extended: true}));
 
-let webPath1 = pathutil.resolve(__dirname, '../kanban-website')
-let webPath2 = pathutil.resolve(__dirname, '../kanban-www')
+let webPath1 = pathutil.resolve(__dirname, '../')
 //全局拦截器
 app.use(function (req, res, next) {
     res.set('Cache-Control', 'no-cache')
@@ -33,8 +32,8 @@ app.use(function (req, res, next) {
 });
 // http://localhost:3007/kanban-website/
 // http://localhost:3007/kanban-www/build/index.html
-app.use('/kanban-website', express.static(webPath1));//注意：必须在全局拦截器之后，否则拦截器无法运行
-app.use('/kanban-www', express.static(webPath2));//注意：必须在全局拦截器之后，否则拦截器无法运行
+app.use('/', express.static(webPath1));//注意：必须在全局拦截器之后，否则拦截器无法运行
+//app.use('/kanban-www', express.static(webPath2));//注意：必须在全局拦截器之后，否则拦截器无法运行
 
 app.get('/action/jira-info',function(req, res){
     res.send(jiraUtil.getJiraInfo())
