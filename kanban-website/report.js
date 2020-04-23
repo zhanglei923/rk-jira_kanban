@@ -99,17 +99,26 @@ let _percentage = (a, b)=>{
     return ((a/b)*100).toFixed(1)
 };
 let showSprintStoryReport = (desc, totalpoints, rpt_assignees)=>{
+    let rid = 'id'+(Math.random()+'').replace(/\./g, '');
     let html = `<tr><td colspan="999" style="background-color:#0000ff21;">
                     "${desc}"，共(<span class="type_number">${totalpoints}</span>点)
+                    <div id="${rid}" class="ct-chart ${rid}" style="height:110px;width:110px;"></div>
                     </td>
                 </tr>`;
     let totalcount = 0;
     for(let name in rpt_assignees){
         totalcount += rpt_assignees[name].count;
     }
+    let chart_labels = [];
+    let chartarr_p = [];
+    let chartarr_c = [];
     for(let name in rpt_assignees){
         let p = rpt_assignees[name].totalpoints;
         let c = rpt_assignees[name].count;
+
+        chart_labels.push(name)
+        chartarr_p.push(p);
+        chartarr_c.push(c);
         html += `<tr>
                     <td class="rpt_item_name" align="right">${name}</td>
                     <td class="type_number" align="right">${c}个</td>
@@ -119,4 +128,11 @@ let showSprintStoryReport = (desc, totalpoints, rpt_assignees)=>{
                 </tr>`;
     }
     $('#summary_list_body').append(html);
+    //chart
+    new Chartist.Bar(`.${rid}`, {
+        labels:chart_labels,
+        series: [
+            chartarr_p
+        ]
+      });
 }
