@@ -74,7 +74,7 @@ let reportCurrentDataInfo_do = (title, records)=>{
     <table border="1" style="border: 1px solid gray;"> 
         <thead>
             <tr>
-                <th colspan="99">${title}</th>
+                <th colspan="99" style="background-color:#0000ff21;">${title}</th>
             </tr>
         </thead>
         <tbody id="currentdata_body">
