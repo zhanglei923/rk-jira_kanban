@@ -150,7 +150,7 @@ let showIssues = (records)=>{
         let jiraUrl = `http://${jiraConfig.host}/browse/${id}`;
         if(summary.devIsDone) statusname = 'devisdone'
         count++;
-        let sprintclass = summary.sprintname.replace(/\s/g,'');
+        let sprintclass = summary.sprintname ? summary.sprintname.replace(/\s/g,'') : '';
         let li = `<tr id="${id}" class="jira_issue issueitem type_${id_prefix} status_${statusname} priority_${summary.priorityId}"
                         data-assignee="${summary.assignee?summary.assignee:''}"
                         data-reporter="${summary.reporter?summary.reporter:''}"
