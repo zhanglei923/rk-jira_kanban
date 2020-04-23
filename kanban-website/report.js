@@ -114,7 +114,7 @@ let showSprintStoryReport = (desc, totalpoints, rpt_assignees)=>{
     $('#summary_list_body').append(html);
     //chart
     if(showchart){
-        let w = chartarr_p.length * 80;
+        let w = chartarr_p.length * 66;
         $(`.${pid}`).width(w);
         $(`.${cid}`).width(w);
         new Chartist.Bar(`.${pid}`, {
