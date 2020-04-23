@@ -81,7 +81,7 @@ let showSprintStoryReport = (desc, totalpoints, rpt_assignees)=>{
     let rid = 'id'+(Math.random()+'').replace(/\./g, '');
     let pid = 'p'+rid;
     let cid = 'c'+rid;
-    let showchart = false;
+    let showchart = true;
     let html = `<tr><td colspan="999" style="background-color:#0000ff21;">
                     <span style="float:left;">"${desc}"，共(<span class="type_number">${totalpoints}</span>点)</span>
                     

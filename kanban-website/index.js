@@ -19,14 +19,18 @@ let init = ()=>{
     $('#queryBtn').on('click', ()=>{
         let query_string = $('#query_string').val();
         query_string = _.trim(query_string);
+        query_string = encodeURIComponent(query_string)
         $.ajax({
             url: `/action/jira/search`,
             cache: false,
             data: {
-                query_string: encodeURIComponent(query_string)
+                query_string
             },
             success: function( response ) {
               showIssues(response)
+              let searchurl = `http://jir${'a.ingage'}app.com/issues/?jql=${query_string}`
+              $('#jira_search_url').text(searchurl)
+              $('#jira_search_url').attr('href', searchurl)
             },
             error:function(ajaxObj,msg,err){
             }
@@ -75,6 +79,7 @@ let init = ()=>{
 $(()=>{
     initKeyInfo(()=>{
         init();
+        initFilterCheckboxes();
     })
 })
 let showIssues = (records)=>{
@@ -161,4 +166,17 @@ let showIssues = (records)=>{
     $('#report_list').html(countsHtml);
     resetSummaryTable()
     generateSprintStoryReport(records);
+}
+let initFilterCheckboxes = ()=>{
+    $('body').on('click','[type="checkbox"][name="checkbox-filters"]', (e)=>{
+        let str = ''
+        $('[type="checkbox"][name="checkbox-filters"]').each((a, ckbx)=>{
+            ckbx = $(ckbx)
+            if($(ckbx).prop('checked')) str += ' OR ' + $(ckbx).val();
+        })
+        str = _.trim(str);
+        str = str.replace(/^\s{0,}OR/g, '')
+        str = _.trim(str);
+        $('#query_string').val(str);
+    })
 }
