@@ -49,7 +49,13 @@ let reportCurrentDataInfo_do = (title, records)=>{
         }
         console.log(summary)
     }
-    let peoplehtml = `<tr><td></td><td>完成</td><td>剩余</td><td>全部</td><td colspan="99"></td></tr>`;
+    let peoplehtml = `<tr>
+                        <td></td>
+                        <td>全部</td>
+                        <td>完成</td>
+                        <td>剩余</td>
+                        <td colspan="99"></td>
+                    </tr>`;
     let chartid = 'chart'+(Math.random()+'').replace(/\./g, '');
     let charttitle = [];
     let chartdata = [[],[],[]]
@@ -62,9 +68,9 @@ let reportCurrentDataInfo_do = (title, records)=>{
         chartdata[2].push(pdata.issue_done)
         peoplehtml += `<tr>
                             <td>${name}</td>
+                            <td class="type_number">${pdata.issue_total}</td>
                             <td class="type_number">${pdata.issue_done}</td>
                             <td class="type_number">${notdone}</td>
-                            <td class="type_number">${pdata.issue_total}</td>
                             <td class="type_number">${_percentage(pdata.issue_done, pdata.issue_total)}%</td>
                             <td colspan="99"></td>
                         </tr>`
