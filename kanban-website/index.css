@@ -3,6 +3,9 @@
     margin: 0;
     font-size: 12px;
 }
+table, thead tr th, tbody tr td,table tr th, table tr td { 
+    border:1px solid #03040447; 
+}
 .content{
     width:300px;
     height:300px;

@@ -16,11 +16,18 @@ let resetSummaryTable = ()=>{
 }
 let generateSprintStoryReport = (records)=>{
     let totalpoints=0;
+    let rpt_devcrew1 = {};
+    let rpt_devcrew2 = {};
     let rpt_devisdone = {};
     let rpt_assignees = {};
     let rpt_types={};
     let rpt_status={};
     let rpt_reporter={};
+    let update = (rptdata, key, summary)=>{
+        if(!rptdata[key]) rptdata[key] = { totalpoints: 0, count:0}
+        rptdata[key].totalpoints += summary.storypoint;
+        rptdata[key].count++;
+    }
     for(let i=0;i<records.length;i++){
         let record = records[i];
         let id = record.id;
@@ -32,36 +39,33 @@ let generateSprintStoryReport = (records)=>{
         let reporter_displayName = summary.reporter_displayName;
         let statusname = status.toLowerCase().replace(/\s/g, '');
         let assignee = summary.assignee?summary.assignee:'';
-        let devisdone_displayName = summary.devIsDone;
+        let devisdone = summary.devIsDone;
+        let devisdoneTxt = devisdone?'完成':'未完成';
         let assignee_displayName = summary.assignee_displayName;
         let issueTypeName = summary.issueTypeName?summary.issueTypeName:'';
         //
-        if(!rpt_devisdone[devisdone_displayName]) rpt_devisdone[devisdone_displayName] = { totalpoints: 0, count:0}
-        rpt_devisdone[devisdone_displayName].totalpoints += summary.storypoint;
-        rpt_devisdone[devisdone_displayName].count++;
+        devisdone ? update(rpt_devcrew1, assignee_displayName+','+devisdoneTxt, summary)
+                  : update(rpt_devcrew2, assignee_displayName+','+devisdoneTxt, summary)
         //
-        if(!rpt_assignees[assignee_displayName]) rpt_assignees[assignee_displayName] = { totalpoints: 0, count:0}
-        rpt_assignees[assignee_displayName].totalpoints += summary.storypoint;
-        rpt_assignees[assignee_displayName].count++;
+        update(rpt_devisdone, devisdoneTxt, summary)
         //
-        if(!rpt_types[issueTypeName]) rpt_types[issueTypeName] = { totalpoints: 0, count:0}
-        rpt_types[issueTypeName].totalpoints += summary.storypoint;
-        rpt_types[issueTypeName].count++;
+        update(rpt_assignees, assignee_displayName, summary)
         //
-        if(!rpt_status[status]) rpt_status[status] = {totalpoints: 0, count:0}
-        rpt_status[status].totalpoints += summary.storypoint;
-        rpt_status[status].count++;
+        update(rpt_types, issueTypeName, summary)
         //
-        if(!rpt_reporter[reporter_displayName]) rpt_reporter[reporter_displayName] = {totalpoints: 0, count:0}
-        rpt_reporter[reporter_displayName].totalpoints += summary.storypoint;
-        rpt_reporter[reporter_displayName].count++;
+        update(rpt_status, status, summary)
+        //
+        update(rpt_reporter, reporter_displayName, summary)
 
         totalpoints += summary.storypoint;
     }
+    
+    showSprintStoryReport('按dev人员【完成】统计', totalpoints, rpt_devcrew1)
+    showSprintStoryReport('按dev人员【未完成】统计', totalpoints, rpt_devcrew2)
     showSprintStoryReport('按dev完成统计', totalpoints, rpt_devisdone)
+    showSprintStoryReport('按上线状态统计', totalpoints, rpt_status)
     showSprintStoryReport('按负责人统计', totalpoints, rpt_assignees)
     showSprintStoryReport('按故事类型统计', totalpoints, rpt_types)
-    showSprintStoryReport('按状态统计', totalpoints, rpt_status)
     showSprintStoryReport('按提需求方统计', totalpoints, rpt_reporter)
 }
 let generateCommitedStretchedReport = (records)=>{
@@ -96,7 +100,7 @@ let _percentage = (a, b)=>{
 };
 let showSprintStoryReport = (desc, totalpoints, rpt_assignees)=>{
     let html = `<tr><td colspan="999" style="background-color:#0000ff21;">
-                    "${desc}"，共(<span class="type_number">${totalpoints}</span>)
+                    "${desc}"，共(<span class="type_number">${totalpoints}</span>点)
                     </td>
                 </tr>`;
     let totalcount = 0;
@@ -108,9 +112,9 @@ let showSprintStoryReport = (desc, totalpoints, rpt_assignees)=>{
         let c = rpt_assignees[name].count;
         html += `<tr>
                     <td class="rpt_item_name" align="right">${name}</td>
-                    <td class="type_number" align="right">${c}</td>
+                    <td class="type_number" align="right">${c}个</td>
                     <td align="right">${_percentage(c, totalcount)}%</td>
-                    <td class="type_number" align="right">${p}</td>
+                    <td class="type_number" align="right">${p}点</td>
                     <td align="right">${_percentage(p,totalpoints)}%</td>
                 </tr>`;
     }
