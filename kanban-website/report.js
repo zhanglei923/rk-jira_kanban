@@ -103,13 +103,13 @@ let showSprintStoryReport = (desc, totalpoints, rpt_assignees)=>{
                     <td class="rpt_item_name" align="right">${name}</td>
                     <td class="type_number" align="right">${c}个</td>
                     <td align="right">${_percentage(c, totalcount)}%</td>
-                    <td class="type_number" align="right">${p}点</td>
+                    <td class="type_number" align="right">${p}p</td>
                     <td align="right">${_percentage(p,totalpoints)}%</td>
                     <td colspan="999">&nbsp;</td>
                 </tr>`;
     }
     html += `<tr><td colspan="999">
-                    <span style="float:left;">"${desc}"，共(<span class="type_number">${totalpoints}</span>点)</span>
+                    <span style="float:left;">"${desc}"，共(<span class="type_number">${totalpoints}</span>p)</span>
                     
                     ${showchart?`<br>
                     <span style="float:left;"><b>个数</b><div id="${cid}" class="ct-chart ${cid}" style="height:110px;"></div></span>
