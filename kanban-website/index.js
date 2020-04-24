@@ -41,6 +41,7 @@ let init = ()=>{
             },
             success: function( response ) {
               showIssues(response)
+              //更新jira的结果链接
               let searchurl = `http://jir${'a.ingage'}app.com/issues/?jql=${query_string}`
               $('#jira_search_url').text(searchurl)
               $('#jira_search_url').attr('href', searchurl)
@@ -83,6 +84,14 @@ let init = ()=>{
             },
             success: function( response ) {
               showIssues(response)
+              //更新jira的结果链接
+              idList.forEach((id, i)=>{
+                idList[i] = `id=${id}`;
+              });
+              idList = idList.join(' OR ');
+              let searchurl = `http://jir${'a.ingage'}app.com/issues/?jql=${encodeURIComponent(idList)}`
+              $('#jira_search_url').text(searchurl)
+              $('#jira_search_url').attr('href', searchurl)
             },
             error:function(ajaxObj,msg,err){
             }
