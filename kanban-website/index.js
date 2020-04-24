@@ -55,7 +55,7 @@ let init = ()=>{
         let excontent = $('#exclude_content').val();
         excontent = _.trim(excontent);
         if(!content) return;
-        let idList = content.match(/[A-Z]{1,}\-[0-9]{1,}/g)
+        let idList = content.toUpperCase().match(/[A-Z]{1,}\-[0-9]{1,}/g)
         if(!idList){
             return;
         }
