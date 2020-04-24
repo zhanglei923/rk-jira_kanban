@@ -22,7 +22,7 @@ let reportCreatedDays = (createdDiffDaysFromNow)=>{
         }else{
             labels.push('')
         }
-        if(valmap[i+'']){
+        if(typeof valmap[i+''] !== 'undefined'){
             chartdata.push(valmap[i+'']);
         }else{
             chartdata.push(0);
