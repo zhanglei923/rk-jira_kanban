@@ -98,9 +98,20 @@ let init = ()=>{
         });
     })
 };
+let initListEvents = ()=>{    
+    $('#jira_list').on('mouseover', '.issueitem', (e)=>{
+        //console.log('ho', e.currentTarget)
+        $(e.currentTarget).addClass('hovering');
+    });
+    $('#jira_list').on('mouseout', '.issueitem', (e)=>{
+        //console.log('ho', e.currentTarget)
+        $(e.currentTarget).removeClass('hovering');
+    });
+}
 $(()=>{
     initKeyInfo(()=>{
         init();
+        initListEvents();
         initFilterCheckboxes();
     })
 })
@@ -184,9 +195,11 @@ let showIssues = (records)=>{
                     <td class="id"><a href="${jiraUrl}" target="_blank">${id}</a></td>
                     <td class="summary" title="${summary.description?summary.description:''}">
                         ${summary.summary}
+                        <span style="float:right;">
                         ${summary.descriptionUrl.length > 0 ? ``+summary.descriptionUrlTxt.join('/') : ''}
                         ${summary.description?'<i style="color:gray;">desc</i>':''}
                         <div class="description">${summary.description?summary.description:''}</div>
+                        </span>
                     </td>
                     <td class="created" style="display:none;">${momCreated.format('YYYY-MM-DD hh:mm')}</td>
                     <td class="diff" align="right" title="${momCreated.format('YYYY-MM-DD hh:mm')}">${diffDays}d</td>
