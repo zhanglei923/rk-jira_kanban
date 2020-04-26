@@ -157,7 +157,14 @@ let showIssues = (records)=>{
         let diffDays = momCreated.diff(new Date(), 'days');
         if(diffDays <= 0)createdDiffDaysFromNow.push(Math.abs(diffDays))
         let jiraUrl = `http://${jiraConfig.host}/browse/${id}`;
-        if(summary.devIsDone) statusname = 'devisdone'
+        if(summary.devIsDone) statusname = 'devisdone';
+        summary.descriptionUrlTxt = [];
+        if(summary.descriptionUrl.length > 0){
+            summary.descriptionUrl.forEach((url, i)=>{
+                let a = `(<a target="_blank" class="url" href="${url}" title="${url}">url${i}</a>)`;
+                summary.descriptionUrlTxt.push(a);
+            })
+        }
         count++;
         let sprintclass = summary.sprintname ? summary.sprintname.replace(/\s/g,'') : '';
         let li = `<tr id="${id}" class="jira_issue issueitem type_${id_prefix} status_${statusname} priority_${summary.priorityId}"
@@ -175,7 +182,12 @@ let showIssues = (records)=>{
                     <td class="status" align="right" title="">${summary.statusName}</td>
                     <td class="status" align="left" title="${summary.statusColor} / ${summary.statusName}">${summary.status}</td>
                     <td class="id"><a href="${jiraUrl}" target="_blank">${id}</a></td>
-                    <td class="summary">${summary.summary}</td>
+                    <td class="summary" title="${summary.description?summary.description:''}">
+                        ${summary.summary}
+                        ${summary.descriptionUrl.length > 0 ? ``+summary.descriptionUrlTxt.join('/') : ''}
+                        ${summary.description?'<i style="color:gray;">desc</i>':''}
+                        <div class="description">${summary.description?summary.description:''}</div>
+                    </td>
                     <td class="created" style="display:none;">${momCreated.format('YYYY-MM-DD hh:mm')}</td>
                     <td class="diff" align="right" title="${momCreated.format('YYYY-MM-DD hh:mm')}">${diffDays}d</td>
                     <td class="point" align="right" title="storypoint">${summary.storypoint}p</td>

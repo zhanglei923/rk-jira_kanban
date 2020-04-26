@@ -61,7 +61,6 @@ let getSummary = (issue)=>{
             summary.stretchorcommited = 'stretched';
             summary.stretchorcommited_displayName = '可选任务(stretched)';
         }
-
         let sprintinfo = issue.fields[KEY_OF_SPRINT_Id];
         if(sprintinfo){
             sprintinfo = sprintinfo.join('')
@@ -76,9 +75,8 @@ let getSummary = (issue)=>{
         }else{
             summary.sprintid = false;
         }
-
+        summary.descriptionUrl = [];
         if(summary.description){
-            summary.descriptionUrl = [];
             let urlset = getUrls(summary.description);
             for (var url of urlset) { // 遍历Set
                 url = url.replace(/\[/g, '').replace(/\]/g, '')
