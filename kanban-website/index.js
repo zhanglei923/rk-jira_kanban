@@ -210,8 +210,10 @@ let showIssues = (records)=>{
 
         records2.push(record);
     }
-
-    html += `</table>`
+    html += `<tr><td colspan="999">
+               JIRA地址：<a id="jira_search_url" target="_blank" href="#">jira url</a>
+            </td></tr>`;
+    html += `</table>`;
     console.warn(countOfStatus)
     //console.warn(jira_urls.join('\n'))
     $('#jira_list').html(html);
