@@ -7,11 +7,11 @@
     border:1px solid #03040447; 
 } */
 .content{
-    width:300px;
-    height:300px;
+    width:120px;
+    height:100px;
 }
 .content_idlist{
-    width:300px;
+    width:120px;
     height:100px;
 }
 .jira_report_table{
