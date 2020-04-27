@@ -144,6 +144,7 @@ let showIssues = (records)=>{
         }
         jira_urls.push(`http://jira.in${'gage'}app.com/browse/${id}`)
         let summary = record.summary;
+        let detail = record.detail;
         // status: issue.fields.status.name,
         // summary: issue.fields.summary,
         // assignee: issue.fields.assignee.name,
@@ -206,6 +207,8 @@ let showIssues = (records)=>{
                     <td class="diff" align="right" title="${momCreated.format('YYYY-MM-DD hh:mm')}">${diffDays}d</td>
                     <td class="point" align="right" title="storypoint">${summary.storypoint}点</td>
                     <td class="updated" style="display:none;">${moment(summary.updated).format('YYYY-MM-DD hh:mm')}</td>
+                    <td class="updated">${showFixedVersions(detail.fields.fixVersions)}</td>
+                    
                 </tr>`
         html += li;
 
@@ -244,4 +247,25 @@ let initFilterCheckboxes = ()=>{
         str = _.trim(str);
         $('#query_string').val(str);
     })
+}
+let showFixedVersions = (fixVersions)=>{
+    if(!fixVersions) return '';
+    let arr = [];
+    fixVersions.forEach((version)=>{
+        let a = `<a target="_blank" href="${version.self}">${version.name}</a>`;        
+        if(0)a += `
+        ${version.released?'released':'not-released'}
+        ${version.archived?'archived':'not-archived'}
+        `;
+        arr.push(a);
+    })
+    return arr.join('')
+     
+    // archived: false
+    // description: ""
+    // id: "13009"
+    // name: "v2007"
+    // released: false
+    // self: "http://jira.ingageapp.com/rest/api/2/version/13009"
+    // return
 }
