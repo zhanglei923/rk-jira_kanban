@@ -107,8 +107,8 @@ let showSprintStoryReport = (desc, totalpoints, rpt_assignees)=>{
         chartarr_c.push(c);
         html += `<tr>
                     <td class="rpt_item_name" align="right">${name}</td>
-                    <td class="type_number" align="right" style="padding-left:2px;">${c}个 (${_percentage(c, totalcount)}%)</td>
-                    <td class="type_number" align="right" style="padding-left:2px;">${p}点 (${_percentage(p,totalpoints)}%)</td>
+                    <td class="type_number iscount_rpt" align="right" style="padding-left:2px;">${c}个 (${_percentage(c, totalcount)}%)</td>
+                    <td class="type_number ispoint_rpt" align="right" style="padding-left:2px;">${p}点 (${_percentage(p,totalpoints)}%)</td>
                 </tr>`;
     }
     html += `<tr><td colspan="999">

@@ -41,6 +41,12 @@ button{
     height:100px;
 }
 .teamperformance_list{
+    display: inline-block;
+}
+.ispoint_rpt{
     background-color: #87ffd77a;
+}
+.iscount_rpt{
+    background-color: #87acff66;
     display: inline-block;
 }
