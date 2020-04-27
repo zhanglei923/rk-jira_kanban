@@ -1,5 +1,6 @@
 let jiraConfig = {};
 let _percentage = (a, b)=>{
+    if(b==0)return 0;
     let num = ((a/b)*100).toFixed(1)
     if(num*1===100) num=100;
     if(num*1===0) num=0;
