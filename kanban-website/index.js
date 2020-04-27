@@ -229,6 +229,7 @@ let showIssues = (records)=>{
     resetSummaryTable();
     reportCreatedDays(createdDiffDaysFromNow);
     reportCurrentDataInfo(records2);
+    reportWholeTeamInfo(records2);
     generateSprintStoryReport(records2);
 }
 let initFilterCheckboxes = ()=>{

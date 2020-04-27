@@ -40,3 +40,7 @@ button{
     width:1100px;
     height:100px;
 }
+.teamperformance_list{
+    background-color: #87ffd77a;
+    display: inline-block;
+}
