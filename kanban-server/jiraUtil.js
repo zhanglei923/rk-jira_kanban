@@ -1,6 +1,7 @@
 let fs = require('fs')
 let pathutil = require('path')
 let _ = require('lodash')
+const getUrls = require('get-urls');
 var JiraApi = require('jira-client');
 
 let configpath = pathutil.resolve(__dirname, '../.config')
@@ -30,6 +31,7 @@ let getSummary = (issue)=>{
     let summary = {}
     try{
         summary ={
+            description:issue.fields.description,
             statusName: issue.fields.status.name,
             status: issue.fields.status.statusCategory.name,
             statusColor: issue.fields.status.statusCategory.colorName,
@@ -46,20 +48,19 @@ let getSummary = (issue)=>{
             storypoint: issue.fields[KEY_OF_SPRINTPOINT]
         };
         let devIsDone = false;
-        if(summary.statusName.indexOf('Sign-Off')>=0) devIsDone = true;
+        if(summary.statusName.toLowerCase().indexOf('sign-off')>=0) devIsDone = true;
         if(summary.status.toLowerCase().replace(/\s/g, '')==='done') devIsDone = true;
         summary.devIsDone = devIsDone;
 
         if(summary.priorityId < 3){
             summary.is_commited = true;
             summary.stretchorcommited = 'commited';
-            summary.stretchorcommited_displayName = '计划内(commited)';
+            summary.stretchorcommited_displayName = '必保任务(commited)';
         }else{
             summary.is_stretched = true;
             summary.stretchorcommited = 'stretched';
-            summary.stretchorcommited_displayName = '计划外(stretched)';
+            summary.stretchorcommited_displayName = '可选任务(stretched)';
         }
-
         let sprintinfo = issue.fields[KEY_OF_SPRINT_Id];
         if(sprintinfo){
             sprintinfo = sprintinfo.join('')
@@ -74,6 +75,14 @@ let getSummary = (issue)=>{
         }else{
             summary.sprintid = false;
         }
+        summary.descriptionUrl = [];
+        if(summary.description){
+            let urlset = getUrls(summary.description);
+            for (var url of urlset) { // 遍历Set
+                url = url.replace(/\[/g, '').replace(/\]/g, '')
+                summary.descriptionUrl.push(url);
+            }
+        }
     }catch(e){
         //fail(jiraId, e)
         throw e;
@@ -85,6 +94,7 @@ let searchJira = (queryString, succ, fail)=>{
     jira.searchJira(queryString).then((o)=>{
         o.issues.forEach((issue, i)=>{
             let summary = getSummary(issue);
+            //fs.writeFileSync(`./${issue.key}.json`, JSON.stringify(issue))
             results.push({
                 id: issue.key,
                 summary,

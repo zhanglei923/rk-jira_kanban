@@ -1,6 +1,16 @@
 .jira_list .issueitem{
     color:red;
 }
+.jira_list .issueitem.hovering{
+    font-weight: bolder;
+}
+.jira_list .issueitem .url{
+    color:blue !important;
+    text-decoration:underline !important;
+}
+.jira_list .issueitem .description{
+    display: none;
+}
 .jira_list .issueTypeName{
     color:black;
 }
