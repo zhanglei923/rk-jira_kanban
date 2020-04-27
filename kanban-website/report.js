@@ -5,10 +5,7 @@ let resetSummaryTable = ()=>{
                 <tr>
                     <th></th>
                     <th>个数</th>
-                    <th>%</th>
                     <th>点数</th>
-                    <th>%</th>
-                    <th colspan="999"></th>
                 </tr>
             </thead>
             <tbody id="summary_list_body">
@@ -62,7 +59,7 @@ let generateSprintStoryReport = (records)=>{
         //
         update(rpt_stretchorcommit, summary.stretchorcommited_displayName, summary)
         //
-        update(rpt_stretchorcommit_detail, devisdoneTxt +','+ summary.stretchorcommited_displayName, summary)
+        update(rpt_stretchorcommit_detail, summary.stretchorcommited_displayName+'/'+devisdoneTxt, summary)
         //
         totalpoints += summary.storypoint;
     }
@@ -92,28 +89,33 @@ let showSprintStoryReport = (desc, totalpoints, rpt_assignees)=>{
     let chart_labels = [];
     let chartarr_p = [];
     let chartarr_c = [];
+    let looparr = [];
     for(let name in rpt_assignees){
-        let p = rpt_assignees[name].totalpoints;
-        let c = rpt_assignees[name].count;
+        let rptdata = rpt_assignees[name];
+        rptdata.name = name;
+        looparr.push(rptdata);
+    }
+    looparr = _.sortBy(looparr, 'name')
+    for(let i=0;i<looparr.length;i++ ){
+        let rptdata = looparr[i]
+        let name = rptdata.name;
+        let p = rptdata.totalpoints;
+        let c = rptdata.count;
 
         chart_labels.push(name)
         chartarr_p.push(p);
         chartarr_c.push(c);
         html += `<tr>
                     <td class="rpt_item_name" align="right">${name}</td>
-                    <td class="type_number" align="right">${c}个</td>
-                    <td align="right">${_percentage(c, totalcount)}%</td>
-                    <td class="type_number" align="right">${p}p</td>
-                    <td align="right">${_percentage(p,totalpoints)}%</td>
-                    <td colspan="999">&nbsp;</td>
+                    <td class="type_number" align="right" style="padding-left:2px;">${c}个 (${_percentage(c, totalcount)}%)</td>
+                    <td class="type_number" align="right" style="padding-left:2px;">${p}点 (${_percentage(p,totalpoints)}%)</td>
                 </tr>`;
     }
     html += `<tr><td colspan="999">
-                    <span style="float:left;">"${desc}"，共(<span class="type_number">${totalpoints}</span>p)</span>
-                    
-                    ${showchart?`<br>
-                    <span style="float:left;"><b>个数</b><div id="${cid}" class="ct-chart ${cid}" style="height:110px;"></div></span>
-                    <span style="float:left;"><b>点数</b><div id="${pid}" class="ct-chart ${pid}" style="height:110px;"></div></span>`
+                    ${showchart?`<br><b>个数</b><div id="${cid}" class="ct-chart ${cid}" style="height:110px;"></div>
+                    <br>
+                    <b>点数</b><div id="${pid}" class="ct-chart ${pid}" style="height:110px;"></div>
+                    `
                     :``}
                     </td>
                 </tr>`;

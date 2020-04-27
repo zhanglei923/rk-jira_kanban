@@ -204,7 +204,7 @@ let showIssues = (records)=>{
                     </td>
                     <td class="created" style="display:none;">${momCreated.format('YYYY-MM-DD hh:mm')}</td>
                     <td class="diff" align="right" title="${momCreated.format('YYYY-MM-DD hh:mm')}">${diffDays}d</td>
-                    <td class="point" align="right" title="storypoint">${summary.storypoint}p</td>
+                    <td class="point" align="right" title="storypoint">${summary.storypoint}点</td>
                     <td class="updated" style="display:none;">${moment(summary.updated).format('YYYY-MM-DD hh:mm')}</td>
                 </tr>`
         html += li;
