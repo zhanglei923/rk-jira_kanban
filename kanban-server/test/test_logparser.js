@@ -85,9 +85,12 @@ let _parseCrewLogs = (crew_name)=>{
     console.log(crew_log_lines)
     
     fs.writeFileSync(pathutil.resolve(dir, `./log_${crew_name}.txt`), crew_log_lines.join('\n'));
-    
+    return crew_log_lines;
 }
 
+let all_logs = [];
 crew_name_list.forEach((crew_name)=>{
-    _parseCrewLogs(crew_name)
+    let log = _parseCrewLogs(crew_name);
+    all_logs = all_logs.concat(log);
 });
+fs.writeFileSync(pathutil.resolve(dir, `./log_${'all'}.txt`), all_logs.join('\n'));
