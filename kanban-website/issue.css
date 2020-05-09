@@ -64,6 +64,9 @@
 .jira_list .notexist{
     color:#bbb;
 }
+.jira_issue .summary{
+    max-width: 500px !important;
+}
 .number_total{
     font-weight: bolder;
     color:black;
