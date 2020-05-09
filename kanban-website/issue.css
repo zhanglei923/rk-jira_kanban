@@ -65,7 +65,7 @@
     color:#bbb;
 }
 .jira_issue .summary{
-    max-width: 300px !important;
+    max-width: 500px !important;
 }
 .number_total{
     font-weight: bolder;

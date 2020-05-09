@@ -214,7 +214,7 @@ let showIssues = (records)=>{
 
         records2.push(record);
     }
-    html += `<tr><td colspan="999">
+    html += `<tr><td colspan="999" style="max-width: 400px;">
                JIRA地址：<a id="jira_search_url" target="_blank" href="#">jira url</a>
             </td></tr>`;
     html += `</table>`;
