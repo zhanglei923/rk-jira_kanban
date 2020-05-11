@@ -1,3 +1,10 @@
+let userFilter;
+if(window.location.search){
+    userFilter = window.location.search.split('filter=')[1]
+    if(userFilter){
+        userFilter = decodeURIComponent(userFilter);
+    }
+}
 let jiraConfig = {};
 let _percentage = (a, b)=>{
     if(b==0)return 0;
@@ -114,6 +121,11 @@ $(()=>{
         init();
         initListEvents();
         initFilterCheckboxes();
+
+        if(userFilter){
+            $('#query_string').val(userFilter);
+            $('#queryBtn').click();
+        }
     })
 })
 let showIssues = (records)=>{

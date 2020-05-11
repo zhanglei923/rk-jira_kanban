@@ -47,11 +47,16 @@ let reportWholeTeamInfo = (records)=>{
     rpttxt += `
     <div class="iscount_rpt">
         全部个数：${totalnum} = <span class="number_done">${totalnum_done}</span> + <span class="number_open">${totalnum_notdone}</span>，完成率${_percentage(totalnum_done, totalnum)}%<br>
-        &emsp;commited个数：${report_num.commited.total} = <span class="number_done">${report_num.commited.done}</span> + <span class="number_open">${report_num.commited.notdone}</span>，完成率${_percentage(report_num.commited.done, report_num.commited.total)}%<br>
-        &emsp;stretched个数：${report_num.stretched.total} = <span class="number_done">${report_num.stretched.done}</span> + <span class="number_open">${report_num.stretched.notdone}</span>，完成率${_percentage(report_num.stretched.done, report_num.stretched.total)}%<br>
-        其中，<br>
-        &emsp;commited：${report_num.commited.total}个(${_percentage(report_num.commited.total, totalnum)}%)<br>
-        &emsp;stretched：${report_num.stretched.total}个(${_percentage(report_num.stretched.total, totalnum)}%)<br>
+        &emsp;commited个数，占比(${_percentage(report_num.commited.total, totalnum)}%)：${report_num.commited.total} = <span class="number_done">${report_num.commited.done}</span> + <span class="number_open">${report_num.commited.notdone}</span>，
+        完成率${_percentage(report_num.commited.done, report_num.commited.total)}%
+        ，完成占总数的${report_num.commited.done}/${totalnum}=${_percentage(report_num.commited.done, totalnum)}%
+        ，未完成占总数的${report_num.commited.notdone}/${totalnum}=${_percentage(report_num.commited.notdone, totalnum)}%
+        <br>
+        &emsp;stretched个数，占比(${_percentage(report_num.stretched.total, totalnum)}%)：${report_num.stretched.total} = <span class="number_done">${report_num.stretched.done}</span> + <span class="number_open">${report_num.stretched.notdone}</span>，
+        完成率${_percentage(report_num.stretched.done, report_num.stretched.total)}%
+        ，完成占总数的${report_num.stretched.done}/${totalnum}=${_percentage(report_num.stretched.done, totalnum)}%
+        ，未完成占总数的${report_num.stretched.notdone}/${totalnum}=${_percentage(report_num.stretched.notdone, totalnum)}%
+        <br>
     </div>`
 
     rpttxt += `<hr>`
@@ -60,11 +65,16 @@ let reportWholeTeamInfo = (records)=>{
     rpttxt += `
     <div class="ispoint_rpt">
         全部点数：${totalpoints} = <span class="number_done">${totalpoints_done}</span> + <span class="number_open">${totalpoints_notdone}</span>，完成率${_percentage(totalpoints_done, totalpoints)}%<br>
-        &emsp;commited点数：${report_point.commited.total} = <span class="number_done">${report_point.commited.done}</span> + <span class="number_open">${report_point.commited.notdone}</span>，完成率${_percentage(report_point.commited.done, report_point.commited.total)}%<br>
-        &emsp;stretched点数：${report_point.stretched.total} = <span class="number_done">${report_point.stretched.done}</span> + <span class="number_open">${report_point.stretched.notdone}</span>，完成率${_percentage(report_point.stretched.done, report_point.stretched.total)}%<br>
-        其中，<br>
-        &emsp;commited：${report_point.commited.total}点(${_percentage(report_point.commited.total, totalpoints)}%)<br>
-        &emsp;stretched：${report_point.stretched.total}点(${_percentage(report_point.stretched.total, totalpoints)}%)<br>
+        &emsp;commited点数，占比(${_percentage(report_point.commited.total, totalpoints)}%)：${report_point.commited.total} = <span class="number_done">${report_point.commited.done}</span> + <span class="number_open">${report_point.commited.notdone}</span>，
+        完成率${_percentage(report_point.commited.done, report_point.commited.total)}%
+        ，完成占总数的${report_point.commited.done}/${totalpoints}=${_percentage(report_point.commited.done, totalpoints)}%
+        ，未完成占总数的${report_point.commited.notdone}/${totalpoints}=${_percentage(report_point.commited.notdone, totalpoints)}%
+        <br>
+        &emsp;stretched点数，占比(${_percentage(report_point.stretched.total, totalpoints)}%)：${report_point.stretched.total} = <span class="number_done">${report_point.stretched.done}</span> + <span class="number_open">${report_point.stretched.notdone}</span>，
+        完成率${_percentage(report_point.stretched.done, report_point.stretched.total)}%
+        ，完成占总数的${report_point.stretched.done}/${totalpoints}=${_percentage(report_point.stretched.done, totalpoints)}%
+        ，未完成占总数的${report_point.stretched.notdone}/${totalpoints}=${_percentage(report_point.stretched.notdone, totalpoints)}%
+        <br>
     </div>`
     
     console.log(report_point)
