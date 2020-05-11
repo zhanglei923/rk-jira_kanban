@@ -21,13 +21,13 @@
     background-color:#ff0000c7;
 }
 .jira_list .status_todo .status{
-    background-color:#ff5b5b80;
+    background-color:#ff5b5b45;
 }
 .jira_list .status_open .status{
     background-color:#ff0000c7;
 }
 .jira_list .status_reopened .status{
-    background-color:#ffcacab8;
+    background-color:#ff5b5b45;
 }
 .jira_list .status_done *{
     background-color:white !important;
