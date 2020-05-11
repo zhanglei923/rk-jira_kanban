@@ -1,6 +1,6 @@
 let resetSummaryTable = ()=>{
     $('#summary_list').html(`
-        <table border="1" style="border: 1px solid gray;"> 
+        <table border="0" style="border: 0px solid gray;"> 
             <thead>
                 <tr>
                     <th></th>

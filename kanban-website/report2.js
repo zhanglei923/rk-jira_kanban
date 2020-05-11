@@ -87,7 +87,7 @@ let reportCurrentDataInfo_do = (title, records)=>{
     peoplehtml += `<tr><td colspan="99"><div class="${chartid}" style="width:600px;"></div></td></tr>`;
 
     let html = `
-    <table border="1" style="border: 1px solid gray;"> 
+    <table border="0" style="border: 0px solid gray;"> 
         <thead>
             <tr>
                 <th colspan="99" style="background-color:#0000ff21;">${title}</th>
