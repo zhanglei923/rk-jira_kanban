@@ -38,7 +38,7 @@ let getIds = (txt)=>{
 }
 let init = ()=>{
     $('#queryBtn').on('click', ()=>{
-        $('#jira_list').html(`loading...`);
+        $('#jira_list').html(`<b style="color:red;font-size:20px;">loading...</b>`);
         let query_string = $('#query_string').val();
         query_string = _.trim(query_string);
         query_string = encodeURIComponent(query_string)
