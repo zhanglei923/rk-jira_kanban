@@ -4,6 +4,7 @@
     "express": "^4.17.1",
     "jira-client": "^6.13.0",
     "lodash": "^4.17.15",
-    "get-urls": "9.2.0"
+    "get-urls": "9.2.0",
+    "make-dir": "3.0.2"
   }
 }

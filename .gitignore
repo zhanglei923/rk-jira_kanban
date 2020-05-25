@@ -5,3 +5,4 @@ yarn.lock
 kanban-server/test/log.txt
 kanban-server/test/log_inf.txt
 kanban-server/test/log_***
+kanban-server/services/logParser/rpt/**
