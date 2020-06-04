@@ -35,6 +35,13 @@ app.use(function (req, res, next) {
 app.use('/', express.static(webPath1));//注意：必须在全局拦截器之后，否则拦截器无法运行
 //app.use('/kanban-www', express.static(webPath2));//注意：必须在全局拦截器之后，否则拦截器无法运行
 
+app.post('/action/log/parse',function(req, res){
+    let logparser = require('./services/logParser/logparser')
+    let rawlog = req.body.rawlog;
+    
+    let rpt = logparser.parse(rawlog);
+    res.send({rpt})
+});
 app.get('/action/jira-info',function(req, res){
     res.send(jiraUtil.getJiraInfo())
 });

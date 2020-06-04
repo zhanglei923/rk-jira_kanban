@@ -1,1 +1,29 @@
-fff
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <link rel="icon" href="http://10.10.0.115/doc/_lib/images/favicon.ico" type="image/x-icon" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <title>jira test</title>
+    <script src="../lib/moment.min.js"></script>
+    <script src="../lib/lodash.min.js"></script>
+    <script src="../lib/jquery.min.js"></script>
+    <script src="./logparser.js"></script>
+    <style>
+        body{
+            background-color: #eee;
+        }
+    </style>
+</head>
+<body>
+  <div>
+      <div style="float:left;">
+        <textarea id="rawlog" class="content" placeholder="在这里粘贴文本" style="width: 200px;height: 500px;"></textarea>
+        <button style="background-color: aquamarine;" onclick="do_parse();">解析</button>
+        <textarea id="parsedlog" class="content_idlist" placeholder="日志解析结果" style="width: 700px;height: 500px;"></textarea>    
+      </div>
+  </div>
+</body>
+</html>

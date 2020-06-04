@@ -10,6 +10,7 @@ let parse = (logcontent)=>{
     let all_logs = [];
     let crew_name_list = getCrews(logcontent);
     console.log(crew_name_list);
+    if(!crew_name_list) return '';
     crew_name_list.forEach((crew_name)=>{
         let log = _parseCrewLogs(crew_name, logcontent);
         all_logs = all_logs.concat(log);
@@ -19,6 +20,7 @@ let parse = (logcontent)=>{
 let getCrews = (logcontent)=>{
     let crews = []
     let rawcrews = logcontent.match(/\>{3}[a-z0-9]{1,}\>{3}/g);
+    if(!rawcrews) return;
     //console.log('crews', rawcrews);
     for(let i=0;i<rawcrews.length;i++){
         crews.push(_.trim(rawcrews[i].replace(/\>/g, '')));
