@@ -4,19 +4,30 @@ let _ = require('lodash')
 let mkdir = require('make-dir');
 let jiraUtil = require('../../jiraUtil');
 
-let dir = pathutil.parse(__filename).dir;
-let rptDir = pathutil.resolve(dir, './rpt');
-mkdir.sync(rptDir);
-
 let jira_reg = /[A-Z]{1,}\-[0-9]{1,}/g
 
-let logcontent = fs.readFileSync(pathutil.resolve(rptDir, './log.txt'), 'utf8')
-
-let crew_name_list = [
-    'zl','cz','lhd','sxf','why'
-];
-
-let _parseCrewLogs = (crew_name)=>{
+let parse = (logcontent)=>{
+    let all_logs = [];
+    let crew_name_list = getCrews(logcontent);
+    console.log(crew_name_list);
+    crew_name_list.forEach((crew_name)=>{
+        let log = _parseCrewLogs(crew_name, logcontent);
+        all_logs = all_logs.concat(log);
+    });
+    return all_logs.join('\n');
+}
+let getCrews = (logcontent)=>{
+    let crews = []
+    let rawcrews = logcontent.match(/\>{3}[a-z0-9]{1,}\>{3}/g);
+    //console.log('crews', rawcrews);
+    for(let i=0;i<rawcrews.length;i++){
+        crews.push(_.trim(rawcrews[i].replace(/\>/g, '')));
+    }
+    crews = _.uniq(crews);
+    console.log(crews);
+    return crews;
+}
+let _parseCrewLogs = (crew_name, logcontent)=>{
     let crew_marker = `>>>${crew_name}>>>`;
     let crew_blocks = logcontent.split(crew_marker);
     
@@ -88,13 +99,10 @@ let _parseCrewLogs = (crew_name)=>{
     crew_log_lines.push(crew_marker+'END')
     console.log(crew_log_lines)
     
-    fs.writeFileSync(pathutil.resolve(rptDir, `./log_${crew_name}.txt`), crew_log_lines.join('\n'));
     return crew_log_lines;
 }
 
-let all_logs = [];
-crew_name_list.forEach((crew_name)=>{
-    let log = _parseCrewLogs(crew_name);
-    all_logs = all_logs.concat(log);
-});
-fs.writeFileSync(pathutil.resolve(rptDir, `./log_${'all'}.txt`), all_logs.join('\n'));
+
+module.exports = {
+    parse
+}
